@@ -1,0 +1,6 @@
+{
+  "name": "Canary Project",
+  "tagline": "Ambient Monitoring Taking Flight",
+  "body": "### Welcome to the Canary Project\r\nThe Canary Project is working to build an ambient monitoring solution for easy operational monitoring of a web application.\r\n\r\n### How It Works\r\nThe Canary Project integrates right into your web application with easy plug and play middleware that generates meaningful data to display on the dashboard.\r\n\r\n### Getting Started\r\nCanary Project is still in development, but look out for a beta coming soon.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
