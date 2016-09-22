@@ -1,0 +1,5 @@
+# Prepend the file
+php_value auto_prepend_file "/dir/path/utilities.php"
+
+# Append file to bottom of page
+php_value auto_append_file "/dir/path/templates/footer.php
