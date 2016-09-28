@@ -1,3 +1,4 @@
+'''
 Table
 	User : string (name/identifier/???)
 	Advanced : bool (enables editing of data sources)
@@ -12,7 +13,8 @@ Table
 	refresh_rate : int (ms)
 	
 	data_squares[ ] : list of objects of type Square
-
+'''
+'''
 Square
 	derivative : bool (does it track a rate of change)
 	data_key : string (gives what value to query)
@@ -24,3 +26,5 @@ Square
 	data_value_high : int (max value data should ever reach)
 	data_value_low : int (min value data should ever reach)
 	data_value_current : int (currently stored value for data point)
+'''
+
