@@ -1,0 +1,25 @@
+body {
+    background-image: linear-gradient(0deg,rgba(1,1,1,.25),rgba(1,1,1,.25)),url("res/bg.jpg");
+    background-repeat: repeat-x repeat-y;
+}
+
+#main {
+    display: flex;
+    background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
+    position: fixed;
+    z-index: 9001;
+    width: 100%;
+    height: 20vh;
+    text-align: center;
+    top: 40vh;
+    left: 0;
+}
+
+#auth {
+    margin: auto;
+}
+
+.in {
+    width: 200;
+    text-align: center;
+}
