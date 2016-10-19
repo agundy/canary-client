@@ -22,4 +22,11 @@ body {
 .in {
     width: 200;
     text-align: center;
+    clear: both;
+    float: left;
+    margin: 3px;
+}
+
+.hide {
+    display: none;
 }
