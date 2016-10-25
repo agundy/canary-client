@@ -16,11 +16,12 @@ body {
 }
 
 #settings {
-    width: 20%;
+    background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
+    width: 25%;
 }
 
 #project_dash {
-    width: 80%;
+    width: 75%;
 }
 .hide {
     display: none;
