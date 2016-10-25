@@ -11,7 +11,7 @@ function register() {
             reg_info[i].className = "in";
             reg_info[i].required = true;
             registration.innerHTML = "Just Kidding";
-						document.getElementById("main").style.height = "25vh";
+						//document.getElementById("main").style.height = "25vh";
             login.innerHTML = "Register";
         }
 }
@@ -21,7 +21,7 @@ function unregister() {
         for (i = 0; i < reg_info.length; i++) {
             reg_info[i].className = "in hide";
             reg_info[i].required = false;
-						document.getElementById("main").style.height = "20vh";
+						//document.getElementById("main").style.height = "20vh";
             registration.innerHTML = "Register";
             login.innerHTML = "Login";
         }

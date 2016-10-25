@@ -8,11 +8,11 @@ body {
     background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
     position: fixed;
     z-index: 9001;
-    width: 135vh;
-    height: 90vh;
+    width: 50vw;
+    height: 50vh;
     text-align: center;
-    top: 5vh;
-    left: calc(50vw - 66.5vh);
+    top: 25vh;
+    left: 25vw;
 }
 
 #auth {
