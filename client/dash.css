@@ -16,14 +16,41 @@ body {
 }
 
 #settings {
+    position: relative;
     background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
     width: 25%;
+    color: white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #project_dash {
     width: 75%;
 }
+#logo {
+    max-width: 100%;
+    max-height: 75px;
+}
+
+#greeting{
+    height: 25%;
+    border-bottom-style: solid;
+    border-bottom-color: gray;
+}
+
+#sources {
+    display: block;
+    height: 35%;
+    width:90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: white;
+    overflow-y: scroll;
+}
+
 .hide {
     display: none;
 }
 
+#attribution{
+    margin-top: 20%;
+}
