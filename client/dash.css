@@ -51,6 +51,11 @@ body {
     display: none;
 }
 
+.controller {
+    width:20%;
+    background-color: lightsteelblue;
+}
+
 #attribution{
     margin-top: 20%;
 }
