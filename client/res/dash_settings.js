@@ -43,7 +43,7 @@ document.getElementById("gear").addEventListener('click', function() {
 }, false);
 
 document.getElementById("more").addEventListener('click', function() {
-    alert("I should probably remove all of this duplicate code.");
+    alert("Access Denied. Please contact your project administrator.");
 }, false);
 
 var greeting = document.getElementById("name");
