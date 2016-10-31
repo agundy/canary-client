@@ -13,6 +13,12 @@ function addSource(){
     sources.appendChild(selector);
 }
 
+function popSource(){
+    sources = document.getElementById("sources");
+    toPop = sources.lastElementChild;
+    sources.removeChild(toPop);
+}
+
 var source_array = [
     {value: "404", text: "404"},
     {value: "d404", text: "404 rate"},
@@ -25,15 +31,15 @@ var source_array = [
 ]
 
 document.getElementById("plus").addEventListener('click', function() {
-    alert("foo");
+    addSource();
 }, false);
 
 document.getElementById("minus").addEventListener('click', function() {
-    alert("bar");
+    popSource();
 }, false);
 
 document.getElementById("gear").addEventListener('click', function() {
-    alert("baz");
+    alert("Access Denied. Please contact your project administrator.");
 }, false);
 
 document.getElementById("more").addEventListener('click', function() {
