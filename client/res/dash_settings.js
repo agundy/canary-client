@@ -17,14 +17,17 @@ function popSource(){
     sources = document.getElementById("sources");
     toPop = sources.lastElementChild;
     sources.removeChild(toPop);
+		updateTable();
 }
 
 function loadTable(){
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
-		var data = sources.children;
-		var numRows;
-		if(data.length%4 == 0){
+		data = sources.children;
+		if(data.length == 0) {
+				numRows = 0;
+		}
+		else if(data.length%4 == 0){
 				numRows = data.length/4;
 		}
 		else {
@@ -34,11 +37,43 @@ function loadTable(){
 		for(var i = 0; i<numRows; i++) {
 				var row = table.insertRow(table.rows.length)
 				for(var j = 0; j<4; j++) {
-						row.insertCell(j).innerHTML = data.item(0).children[k].text;
+						row.insertCell(j).innerHTML = data[k][data[k].selectedIndex].text;
 						row.cells[j].style.backgroundColor = colors[k%7];
 						k++;
 				}
 		}
+}
+
+function updateTable() {
+		table = document.getElementById("dash_table");
+		sources = document.getElementById("sources");
+		data = sources.children;
+		var newNumRows;
+		if(data.length == 0) {
+				newNumRows = 0;
+		}
+		else if(data.length%4 == 0){
+				newNumRows = data.length/4;
+		}
+		else {
+				newNumRows = Math.floor(data.length/4)+1;
+		}
+		console.log(table.rows.length-1);
+		var row = table.rows[table.rows.length-1];
+		if(newNumRows == 0) {
+				table.deleteRow(0);
+		}
+		else if(newNumRows > numRows) {
+				row.insertCell(row.cells.length).innerHTML = data[newNumRows][row.cells.length].text;
+		}
+		else {
+				console.log(row.cells.length-1);
+				row.deleteCell(row.cells.length-1);
+				if(row.cells.length == 0) {
+						table.deleteRow(table.rows.length-1);
+				}
+		}
+		numRows = newNumRows;
 }
 
 var source_array = [
@@ -52,6 +87,7 @@ var source_array = [
     {value: "usr2", text: "API 3"}
 ]
 
+var numRows;
 var colors = ["red","orange","yellow","green","blue","indigo","violet"]
 
 document.getElementById("plus").addEventListener('click', function() {
