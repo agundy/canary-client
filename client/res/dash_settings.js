@@ -19,6 +19,28 @@ function popSource(){
     sources.removeChild(toPop);
 }
 
+function loadTable(){
+		table = document.getElementById("dash_table");
+		sources = document.getElementById("sources");
+		var data = sources.children;
+		var numRows;
+		if(data.length%4 == 0){
+				numRows = data.length/4;
+		}
+		else {
+				numRows = Math.floor(data.length/4)+1;
+		}
+		var k = 0;
+		for(var i = 0; i<numRows; i++) {
+				var row = table.insertRow(table.rows.length)
+				for(var j = 0; j<4; j++) {
+						row.insertCell(j).innerHTML = data.item(0).children[k].text;
+						row.cells[j].style.backgroundColor = colors[k%7];
+						k++;
+				}
+		}
+}
+
 var source_array = [
     {value: "404", text: "404"},
     {value: "d404", text: "404 rate"},
@@ -29,6 +51,8 @@ var source_array = [
     {value: "usr1", text: "API 2"},
     {value: "usr2", text: "API 3"}
 ]
+
+var colors = ["red","orange","yellow","green","blue","indigo","violet"]
 
 document.getElementById("plus").addEventListener('click', function() {
     addSource();
