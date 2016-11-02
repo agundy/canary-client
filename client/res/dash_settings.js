@@ -19,6 +19,14 @@ function popSource(){
     sources.removeChild(toPop);
 }
 
+function refreshSources(){
+    var myTable = document.getElementById("dash_table");
+    while (myTable.firstChild) { 
+        myTable.removeChild(myTable.firstChild);
+    }
+    loadTable();
+}
+
 function loadTable(){
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
@@ -33,8 +41,8 @@ function loadTable(){
 		var k = 0;
 		for(var i = 0; i<numRows; i++) {
 				var row = table.insertRow(table.rows.length)
-				for(var j = 0; j<4; j++) {
-						row.insertCell(j).innerHTML = data.item(0).children[k].text;
+				for(var j = 0; j<4 && data.item(k); j++) {
+						row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
 						row.cells[j].style.backgroundColor = colors[k%7];
 						k++;
 				}
@@ -63,7 +71,7 @@ document.getElementById("minus").addEventListener('click', function() {
 }, false);
 
 document.getElementById("gear").addEventListener('click', function() {
-    alert("Access Denied. Please contact your project administrator.");
+    refreshSources();
 }, false);
 
 document.getElementById("more").addEventListener('click', function() {
