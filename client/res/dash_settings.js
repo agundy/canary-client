@@ -28,7 +28,6 @@ function refreshSources(){
 }
 
 function loadTable(){
-<<<<<<< HEAD
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
 		var data = sources.children;
@@ -42,29 +41,6 @@ function loadTable(){
 						k++;
 				}
 		}
-=======
-    table = document.getElementById("dash_table");
-    sources = document.getElementById("sources");
-    data = sources.children;
-    if(data.length == 0) {
-        numRows = 0;
-    }
-    else if(data.length%4 == 0){
-        numRows = data.length/4;
-    }
-    else {
-        numRows = Math.floor(data.length/4)+1;
-    }
-    var k = 0;
-    for(var i = 0; i<numRows; i++) {
-        var row = table.insertRow(table.rows.length)
-        for(var j = 0; j<4 && data.item(k); j++) {
-            row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
-            row.cells[j].style.backgroundColor = colors[k%7];
-            k++;
-        }
-    }
->>>>>>> edbbefa1b8e2bfdcca824221a61c162b91649feb
 }
 
 var source_array = [
