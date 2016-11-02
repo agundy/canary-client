@@ -27,17 +27,6 @@ function unregister() {
         }
 }
 
-function sendForm(){
-    formData = $("#auth").serializeObject();
-    $.ajax({
-        url: '/',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(formData),
-        dataType: 'json',
-        success:function(e){}
-    });
-}
 
 registration.addEventListener('click', function() {
     flag_register == 0 ? register(): unregister() ;

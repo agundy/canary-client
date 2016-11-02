@@ -22,15 +22,27 @@
     <script>
         function sendForm(){
         formData = $("#auth").serializeObject();
-        $.ajax({
-            url: '/',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            dataType: 'json',
-            success:function(e){}
-        });
+        if (document.getElementById("login").innerHTML == "Login"){
+            $.ajax({
+                url: '/api/login',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success:function(e){}
+            });
+        } else {
+            $.ajax({
+                url: '/api/signup',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success:function(e){}
+            });
         }
+        }
+            
     </script>
 </BODY>
 </HTML>
