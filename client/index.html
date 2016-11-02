@@ -1,10 +1,13 @@
 <HTML>
 <HEAD>
+    <meta charset="UTF-8">
     <LINK href="index.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://raw.githubusercontent.com/macek/jquery-serialize-object/master/dist/jquery.serialize-object.min.js"></script>
 </HEAD>
 <BODY>
     <div id="main">
-        <form enctype='application/json' method="post" action="/" id="auth">
+        <form onsubmit="sendForm()" id="auth">
             <div id ="forms">
                 <input class="in" type="text" placeholder="Enter Username" name="username" required>
                 <input class="in" type="password" placeholder="Enter Password" name="password" required>
@@ -16,5 +19,18 @@
         </form>
     </div>
     <script src="res/register.js"></script>
+    <script>
+        function sendForm(){
+        formData = $("#auth").serializeObject();
+        $.ajax({
+            url: '/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            success:function(e){}
+        });
+        }
+    </script>
 </BODY>
 </HTML>
