@@ -31,7 +31,7 @@ function loadTable(){
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
 		var data = sources.children;
-		var numRows = Math.floor(Math.sqrt(data.length)) + 1;
+		var numRows = Math.ceil(Math.sqrt(data.length));
 		var k = 0;
 		for(var i = 0; i<numRows; i++) {
 				var row = table.insertRow(table.rows.length)
