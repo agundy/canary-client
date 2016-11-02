@@ -17,7 +17,6 @@ function popSource(){
     sources = document.getElementById("sources");
     toPop = sources.lastElementChild;
     sources.removeChild(toPop);
-		updateTable();
 }
 
 function loadTable(){
@@ -43,9 +42,10 @@ function loadTable(){
 				}
 		}
 }
-
+/*
 function updateTable() {
 		table = document.getElementById("dash_table");
+		console.log(table == null);
 		sources = document.getElementById("sources");
 		data = sources.children;
 		var newNumRows;
@@ -58,24 +58,36 @@ function updateTable() {
 		else {
 				newNumRows = Math.floor(data.length/4)+1;
 		}
-		console.log(table.rows.length-1);
-		var row = table.rows[table.rows.length-1];
+		console.log(newNumRows);
 		if(newNumRows == 0) {
 				table.deleteRow(0);
 		}
 		else if(newNumRows > numRows) {
-				row.insertCell(row.cells.length).innerHTML = data[newNumRows][row.cells.length].text;
+				var row;
+				if(table == null) {
+						row = table.insertRow(numRows);
+				}
+				if(table.rows.length == 0 || row.cells.length == 4)
+				{
+						row = table.insertRow(numRows);
+						row.insertCell(0).innerHTML = data[newNumRows][row.cell.length].text;
+				}
+				else {
+						row.insertCell(row.cells.length).innerHTML = data[newNumRows][row.cells.length].text;
+				}
 		}
 		else {
-				console.log(row.cells.length-1);
-				row.deleteCell(row.cells.length-1);
-				if(row.cells.length == 0) {
-						table.deleteRow(table.rows.length-1);
+				var row = table.rows[table.rows.length-1];
+				if(row.cells.length > 0) {
+						row.deleteCell(row.cells.length-1);
+						if(row.cells.length == 0) {
+								table.deleteRow(table.rows.length-1);
+						}
 				}
 		}
 		numRows = newNumRows;
 }
-
+*/
 var source_array = [
     {value: "404", text: "404"},
     {value: "d404", text: "404 rate"},
@@ -87,7 +99,7 @@ var source_array = [
     {value: "usr2", text: "API 3"}
 ]
 
-var numRows;
+var numRows = 0;
 var colors = ["red","orange","yellow","green","blue","indigo","violet"]
 
 document.getElementById("plus").addEventListener('click', function() {
