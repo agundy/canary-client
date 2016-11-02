@@ -30,7 +30,10 @@ function sendForm(){
             contentType: 'application/json',
             data: JSON.stringify(formData),
             dataType: 'json',
-            success:function(e){}
+            success:function(e){
+                $('body').hideLoading();
+                alert('data: ' + e);
+            }
         });
     } else {
         $.ajax({
@@ -39,7 +42,10 @@ function sendForm(){
             contentType: 'application/json',
             data: JSON.stringify(formData),
             dataType: 'json',
-            success:function(e){}
+            success:function(e){
+                $('body').hideLoading();
+                alert('data: ' + e);
+            }
         });
     }
 }
