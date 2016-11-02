@@ -19,6 +19,14 @@ function popSource(){
     sources.removeChild(toPop);
 }
 
+function refreshSources(){
+    var myTable = document.getElementById("dash_table");
+    while (myTable.firstChild) { 
+        myTable.removeChild(myTable.firstChild);
+    }
+    loadTable();
+}
+
 function loadTable(){
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
@@ -35,59 +43,14 @@ function loadTable(){
 		var k = 0;
 		for(var i = 0; i<numRows; i++) {
 				var row = table.insertRow(table.rows.length)
-				for(var j = 0; j<4; j++) {
-						row.insertCell(j).innerHTML = data[k][data[k].selectedIndex].text;
+				for(var j = 0; j<4 && data.item(k); j++) {
+						row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
 						row.cells[j].style.backgroundColor = colors[k%7];
 						k++;
 				}
 		}
 }
-/*
-function updateTable() {
-		table = document.getElementById("dash_table");
-		console.log(table == null);
-		sources = document.getElementById("sources");
-		data = sources.children;
-		var newNumRows;
-		if(data.length == 0) {
-				newNumRows = 0;
-		}
-		else if(data.length%4 == 0){
-				newNumRows = data.length/4;
-		}
-		else {
-				newNumRows = Math.floor(data.length/4)+1;
-		}
-		console.log(newNumRows);
-		if(newNumRows == 0) {
-				table.deleteRow(0);
-		}
-		else if(newNumRows > numRows) {
-				var row;
-				if(table == null) {
-						row = table.insertRow(numRows);
-				}
-				if(table.rows.length == 0 || row.cells.length == 4)
-				{
-						row = table.insertRow(numRows);
-						row.insertCell(0).innerHTML = data[newNumRows][row.cell.length].text;
-				}
-				else {
-						row.insertCell(row.cells.length).innerHTML = data[newNumRows][row.cells.length].text;
-				}
-		}
-		else {
-				var row = table.rows[table.rows.length-1];
-				if(row.cells.length > 0) {
-						row.deleteCell(row.cells.length-1);
-						if(row.cells.length == 0) {
-								table.deleteRow(table.rows.length-1);
-						}
-				}
-		}
-		numRows = newNumRows;
-}
-*/
+
 var source_array = [
     {value: "404", text: "404"},
     {value: "d404", text: "404 rate"},
@@ -111,7 +74,7 @@ document.getElementById("minus").addEventListener('click', function() {
 }, false);
 
 document.getElementById("gear").addEventListener('click', function() {
-    alert("Access Denied. Please contact your project administrator.");
+    refreshSources();
 }, false);
 
 document.getElementById("more").addEventListener('click', function() {
