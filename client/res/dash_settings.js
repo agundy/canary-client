@@ -63,7 +63,8 @@ var source_array = [
     {value: "lat", text: "Latency"},
     {value: "usr0", text: "API 1"},
     {value: "usr1", text: "API 2"},
-    {value: "usr2", text: "API 3"}
+    {value: "usr2", text: "API 3"},
+    {value: "usr3", text: "API 4"}
 ]
 
 //Array for base colors of Cells
