@@ -1,3 +1,6 @@
+/*******************************************
+Adds new data source selection in settings
+********************************************/
 function addSource(){
     sources = document.getElementById("sources");
     var selector = document.createElement("select");
@@ -12,13 +15,18 @@ function addSource(){
     }
     sources.appendChild(selector);
 }
-
+/*******************************************
+Pops last data source selection from settings
+*******************************************/
 function popSource(){
     sources = document.getElementById("sources");
     toPop = sources.lastElementChild;
     sources.removeChild(toPop);
 }
 
+/*******************************************
+Refreshes table to match changes to selection
+*******************************************/
 function refreshSources(){
     var myTable = document.getElementById("dash_table");
     while (myTable.firstChild) { 
@@ -27,7 +35,32 @@ function refreshSources(){
     loadTable();
 }
 
+/*******************************************
+Loads table on page load based on selection
+*******************************************/
 function loadTable(){
+    table = document.getElementById("dash_table");
+    sources = document.getElementById("sources");
+    data = sources.children;
+    var numRows;
+    if(data.length == 0) {
+        numRows = 0;
+    }
+    else if(data.length%4 == 0){
+        numRows = data.length/4;
+    }
+    else {
+        numRows = Math.floor(data.length/4)+1;
+    }
+    var k = 0;
+    for(var i = 0; i<numRows; i++) {
+        var row = table.insertRow(table.rows.length)
+        for(var j = 0; j<4 && data.item(k); j++) {
+            row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
+            row.cells[j].style.backgroundColor = colors[k%7];
+            k++;
+        }
+    }
 		table = document.getElementById("dash_table");
 		sources = document.getElementById("sources");
 		var data = sources.children;
@@ -43,6 +76,7 @@ function loadTable(){
 		}
 }
 
+//Array for data source selection options
 var source_array = [
     {value: "404", text: "404"},
     {value: "d404", text: "404 Rate"},
@@ -54,29 +88,35 @@ var source_array = [
     {value: "usr2", text: "API 3"}
 ]
 
-var numRows = 0;
+//Array for base colors of Cells
 var colors = ["red","orange","yellow","green","blue","indigo","violet"]
 
+//Click event listener for add data source selection button
 document.getElementById("plus").addEventListener('click', function() {
     addSource();
 }, false);
 
+//Click event listener for remove data source selection button
 document.getElementById("minus").addEventListener('click', function() {
     popSource();
 }, false);
 
+//Click event listener for refresh table button
 document.getElementById("gear").addEventListener('click', function() {
     refreshSources();
 }, false);
 
+//Click event listener for viewing other projects
 document.getElementById("more").addEventListener('click', function() {
     alert("Access Denied. Please contact your project administrator.");
 }, false);
 
+//Greeting User
 var greeting = document.getElementById("name");
 var name = "User"; //we can probably get the name from th
 (new Date().getHours() > 12) ? greeting.innerHTML = "Good Afternoon, "+name+"!" : greeting.innerHTML = "Good Morning, "+name+"!";
 
+//Loads default data source selections to settings
 for (var i = 0; i < source_array.length; i += 1) { 
     addSource(); document.getElementById("sources").lastChild.selectedIndex = i; 
 }
