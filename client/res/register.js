@@ -27,6 +27,18 @@ function unregister() {
         }
 }
 
+function sumbitForm() {
+    var userData = new Ext.FormSerializer('auth').toJson();
+    $.ajax({
+      type: "POST",
+      url: "/",
+      data: userData,
+      success: function(){},
+      dataType: "json",
+      contentType : "application/json"
+    });
+}
+
 registration.addEventListener('click', function() {
     flag_register == 0 ? register(): unregister() ;
     
