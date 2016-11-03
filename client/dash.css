@@ -38,6 +38,11 @@ td {
     text-align: center;
     border: 3px solid black;
     display: table-cell;
+    color: transparent;
+}
+
+td:hover {
+    color: black;
 }
 
 #logo {
