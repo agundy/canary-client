@@ -1,22 +1,27 @@
-<HTML>
-<HEAD>
-    <meta charset="UTF-8">
-    <LINK href="index.css" rel="stylesheet" type="text/css">
-    <script src="res/jquery.min.js"></script>
-    <script src="res/jquery.serialize-object.min.js"></script>
-</HEAD>
-<BODY>
-    <div id="main">
-        <form onsubmit="sendForm()" id="auth">
-            <div id ="forms">
-                <input class="in" type="email" placeholder="Enter Email" name="email" required>
-                <input class="in" type="password" placeholder="Enter Password" name="password" required>
-                <input class="in hide" type="name" placeholder="Enter Name" name="name">
-            </div>
-            <button type="submit" id="login">Login</button>
-            <button type="button" id="register">Register</button>
-        </form>
-    </div>
-    <script src="res/register.js"></script>
-</BODY>
+<HTML ng-app="app">
+    <HEAD>
+        <meta charset="UTF-8">
+        <base href="/">
+
+        <LINK href="index.css" rel="stylesheet" type="text/css">
+        <LINK href="dash.css" rel="stylesheet" type="text/css">
+
+        <script src="res/jquery.min.js"></script>
+        <script src="res/jquery.serialize-object.min.js"></script>
+    </HEAD>
+    <BODY>
+        <div ng-view></div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.js"></script>
+        <script src="/res/app.js"></script>
+        <script src="/res/auth.service.js"></script>
+        <script src="/res/login/login.controller.js"></script>
+        <script src="/res/dashboard/dashboard.controller.js"></script>
+
+    </BODY>
 </HTML>
