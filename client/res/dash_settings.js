@@ -19,6 +19,9 @@ function addSource(){
 Pops last data source selection from settings
 *******************************************/
 function popSource(){
+    if (!document.getElementById("sources").lastElementChild) {
+        return;
+    }
     sources = document.getElementById("sources");
     toPop = sources.lastElementChild;
     sources.removeChild(toPop);

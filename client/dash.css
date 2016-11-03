@@ -3,7 +3,7 @@ body {
     background-repeat: repeat-x repeat-y;
 }
 
-#main {
+#dash {
     display: flex;
     background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
     position: fixed;
@@ -38,6 +38,11 @@ td {
     text-align: center;
     border: 3px solid black;
     display: table-cell;
+    color: transparent;
+}
+
+td:hover {
+    color: black;
 }
 
 #logo {
