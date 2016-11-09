@@ -1,7 +1,7 @@
 app.factory('Auth', function($http, $rootScope, $cookieStore, $location) {
   return {
     login(user){
-      var target = (user.user == null)  ? "/api/login" : "/api/signup";
+      var target = (user.name == '')  ? "/api/login" : "/api/signup";
       return $http.post(target, user)
         .then(function(resp) {
             console.log(resp)
