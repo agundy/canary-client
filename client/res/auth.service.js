@@ -8,6 +8,14 @@ app.factory('Auth', function($http, $rootScope, $cookieStore, $location) {
           $cookieStore.put('jwt', resp.data.token);
         });
     },
+    register(user){
+      return $http.post('/api/signup', user)
+        .then(function(resp) {
+            console.log(resp)
+          $rootScope.token = resp.data.token;
+          $cookieStore.put('jwt', resp.data.token);
+        });
+    },
     logout(){
       $rootScope.token = null;
       $cookieStore.remove('jwt');
