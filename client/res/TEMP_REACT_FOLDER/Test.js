@@ -25,7 +25,8 @@ var Cell = React.createClass({
 });
 */
 
-var rootElement = React.createElement('div',{},Table);
+var rootElement = React.createElement('div',{}, 
+                      React.createElement('p',{},"Test"));
 /*
 React.createElement('div',{},
 		React.createElement('table',{},

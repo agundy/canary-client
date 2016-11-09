@@ -39,7 +39,7 @@ function refreshSources(){
 }
 
 /*******************************************
-Loads table on page load based on selection
+Loads table based on data source selections
 *******************************************/
 function loadTable(){
     table = document.getElementById("dash_table");
@@ -48,12 +48,12 @@ function loadTable(){
     var numRows = Math.ceil(Math.sqrt(data.length));
     var k = 0;
     for(var i = 0; i<numRows; i++) {
-            var row = table.insertRow(table.rows.length)
-            for(var j = 0; j<numRows && data.item(k); j++) {
-                    row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
-                    row.cells[j].style.backgroundColor = colors[k%7];
-                    k++;
-            }
+        var row = table.insertRow(table.rows.length)
+        for(var j = 0; j<numRows && data.item(k); j++) {
+            row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
+            row.cells[j].style.backgroundColor = colors[k%7];
+            k++;
+        }
     }
 }
 
