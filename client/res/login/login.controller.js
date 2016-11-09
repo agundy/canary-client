@@ -35,7 +35,7 @@ function register() {
     reg_info.required = true;
     registration.innerHTML = "Just Kidding";
     login.innerHTML = "Register";
-    authform.ng-submit="register()";
+    authform.attr("ng-submit","register()");
 }
 
 function unregister() {
@@ -45,7 +45,7 @@ function unregister() {
     reg_info.value = "";
     registration.innerHTML = "Register";
     login.innerHTML = "Login";
-    authform.ng-submit="register()";
+    authform.attr("ng-submit","login()");
 }
 
 registration.addEventListener('click', function() {
