@@ -53,4 +53,4 @@ $("#register").load($(this).attr("href"),function(){
         flag_register == 0 ? register(): unregister() ;
 
     }, false);
-};
+});
