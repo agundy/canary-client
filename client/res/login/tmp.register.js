@@ -1,31 +1,18 @@
 function a() {
-    var flag_register = 0;
+    var flag_register = false;
     var registration = document.getElementById("register");
     var login = document.getElementById("login-btn");
     var reg_info = document.getElementsByName("name")[0];
 
     function register() {
-        flag_register = 1;
-        reg_info.className = "in";
-        reg_info.required = true;
-        registration.innerHTML = "Just Kidding";
-        login.innerHTML = "Register";
-        $("#auth").attr("ng-submit","register()");
+        reg_info.className = !flag_register ? "in" : "in hide";
+        reg_info.required = !reg_info.required;
+        registration.innerHTML = !flag_register ? "Just Kidding" : "Register";
+        login.innerHTML = !flag_register ? "Register" : "Login";
+        flag_register = !flag_register;
     }
-
-    function unregister() {
-        flag_register = 0;
-        reg_info.className = "in hide";
-        reg_info.required = false;
-        reg_info.value = "";
-        registration.innerHTML = "Register";
-        login.innerHTML = "Login";
-        $("#auth").attr("ng-submit","login()");
-    }
-
-    registration.addEventListener('click', function() {
-        flag_register == 0 ? register(): unregister() ;
-    }, false);
+    
+    registration.addEventListener('click', function() { register(); }, false);
 }
 
 setTimeout(function(){a();}, 500);
