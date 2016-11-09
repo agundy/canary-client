@@ -74,3 +74,4 @@ registration.addEventListener('click', function() {
     flag_register == 0 ? register(): unregister() ;
     
 }, false);
+
