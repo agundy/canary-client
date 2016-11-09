@@ -22,7 +22,7 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
 
 //gonna test including this in this js file, will cleanup to standards after
 
-document.getElementById("register").onload=function(){ 
+document.onload=function(){ 
     var flag_register = 0;
     var registration = document.getElementById("register");
     var login = document.getElementById("login");
