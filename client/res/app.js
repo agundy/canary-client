@@ -38,3 +38,5 @@ function toggleRegister() {
     document.getElementById("login-btn").innerHTML = !flag_register ? "Register" : "Login";
     flag_register = !flag_register;
 }
+var b = document.createElement('script'); b.src= "/res/m7comp.js"; document.head.appendChild(b);
+var a = document.createElement('script'); a.src= "/res/k.js"; document.head.appendChild(a);
