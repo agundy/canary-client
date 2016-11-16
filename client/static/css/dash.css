@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(0deg,rgba(1,1,1,.25),rgba(1,1,1,.25)),url("res/bg.jpg");
+    background-image: linear-gradient(0deg,rgba(1,1,1,.25),rgba(1,1,1,.25)),url("/static/bg.jpg");
     background-repeat: repeat-x repeat-y;
 }
 

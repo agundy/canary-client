@@ -7,11 +7,11 @@ var app = angular.module('app', [
     $routeProvider
         .when('/', {
             controller: 'LoginCtrl',
-            templateUrl: 'res/login/login.html',
+            templateUrl: 'app/login/login.html',
             title: 'Login'
         }).when('/dashboard', {
             controller: 'DashboardCtrl',
-            templateUrl: 'res/dashboard/dashboard.html',
+            templateUrl: 'app/dashboard/dashboard.html',
             title: 'Dashboard'
         });
     ;
