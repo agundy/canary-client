@@ -57,6 +57,9 @@ function loadTable(){
     }
 }
 
+//Array for projects selection options
+var project_array = [{value: 0, text: "Canary"}]
+
 //Array for data source selection options
 var source_array = [
     {value: "404", text: "404"},
@@ -72,6 +75,17 @@ var source_array = [
 
 //Array for base colors of Cells
 var colors = ["red","orange","yellow","green","blue","indigo","violet"]
+
+projects = document.getElementById("projects");
+var proj_selector = document.createElement("select")
+proj_selector.classList = ["sources"];
+for (var i = 0; i < project_array.length; i += 1) {
+    option = document.createElement('option');
+    option.setAttribute('value', project_array[i].value);
+    option.appendChild(document.createTextNode(project_array[i].text));
+    proj_selector.appendChild(option);
+}
+projects.appendChild(proj_selector);
 
 //Click event listener for add data source selection button
 document.getElementById("plus").addEventListener('click', function() {
