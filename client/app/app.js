@@ -16,7 +16,7 @@ var app = angular.module('app', [
         });
     ;
     $httpProvider.interceptors.push('authInterceptor');
-}).factory('authInterceptor', function($rootScope, $q, $cookieStore){
+}).factory('authInterceptor', function($rootScope, $q, $cookieStore, $location){
     return {
         request(config) {
             config.headers = config.headers || {};
@@ -25,6 +25,13 @@ var app = angular.module('app', [
                 $rootScope.jwt = $cookieStore.get('jwt');
             }
             return config;
+        },
+        responseError(response) {
+            if (response.status == 401) {
+                $location.path('/');
+                $cookieStore.remove('token');
+            }
+            return $q.reject(response);
         }
     };
 });
