@@ -76,6 +76,7 @@ var source_array = [
 //Array for base colors of Cells
 var colors = ["red","orange","yellow","green","blue","indigo","violet"]
 
+/***************************************************
 projects = document.getElementById("projects");
 var proj_selector = document.createElement("select")
 proj_selector.classList = ["sources"];
@@ -86,7 +87,7 @@ for (var i = 0; i < project_array.length; i += 1) {
     proj_selector.appendChild(option);
 }
 projects.appendChild(proj_selector);
-
+***************************************************/
 //Click event listener for add data source selection button
 document.getElementById("plus").addEventListener('click', function() {
     addSource();
