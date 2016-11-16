@@ -15,6 +15,7 @@ function addSource(){
     }
     sources.appendChild(selector);
 }
+
 /*******************************************
 Pops last data source selection from settings
 *******************************************/
@@ -35,6 +36,7 @@ function refreshSources(){
     while (myTable.firstChild) { 
         myTable.removeChild(myTable.firstChild);
     }
+		removeSources();
     loadTable();
 }
 
@@ -47,14 +49,34 @@ function loadTable(){
     var data = sources.children;
     var numRows = Math.ceil(Math.sqrt(data.length));
     var k = 0;
+    var del_source = [];
     for(var i = 0; i<numRows; i++) {
         var row = table.insertRow(table.rows.length)
-        for(var j = 0; j<numRows && data.item(k); j++) {
-            row.insertCell(j).innerHTML = data.item(k).children[data.item(k).selectedIndex].text;
+        for(var j = 0; j<numRows; j++) {
+            source_text = data[k].children[data[k].selectedIndex].text;
+            row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
             row.cells[j].style.backgroundColor = colors[k%7];
             k++;
         }
     }
+}
+
+/*******************************************
+Removes sources indicated by user selection
+********************************************/
+function removeSources() {
+    sources = document.getElementById("sources");
+    var data = sources.children;
+    var del_sources = [];
+    for(var i = 0; i<data.length; i++){
+        if(data[i].children[data[i].selectedIndex].text == "Delete Source") {
+            del_sources.push(data[i]);
+        }
+    }
+		
+    for(var j = 0; j<del_sources.length; j++) {
+        sources.removeChild(del_sources[j]);
+    }			
 }
 
 //Array for projects selection options
@@ -70,7 +92,8 @@ var source_array = [
     {value: "usr0", text: "API 1"},
     {value: "usr1", text: "API 2"},
     {value: "usr2", text: "API 3"},
-    {value: "usr3", text: "API 4"}
+    {value: "usr3", text: "API 4"},
+		{value: "del", text: "Delete Source"}
 ]
 
 //Array for base colors of Cells
@@ -114,6 +137,6 @@ var name = "User"; //we can probably get the name from th
 (new Date().getHours() > 12) ? greeting.innerHTML = "Good Afternoon, "+name+"!" : greeting.innerHTML = "Good Morning, "+name+"!";
 
 //Loads default data source selections to settings
-for (var i = 0; i < source_array.length; i += 1) { 
+for (var i = 0; i < source_array.length-1; i += 1) { 
     addSource(); document.getElementById("sources").lastChild.selectedIndex = i; 
 }
