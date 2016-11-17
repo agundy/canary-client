@@ -11,7 +11,17 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
         {value: "usr3", text: "API 4"}
     ];
 
-    var colors = ["red","orange","yellow","green","blue","indigo","violet"];
+    $scope.colors = [ //(on,off)
+	[ "#d27979" , "#ff4d4d" ],
+	[ "#d2b579" , "#ffc34d" ],
+	[ "#b5d279" , "#c3ff4d" ],
+	[ "#79d279" , "#4dff4d" ],
+	[ "#79d2b5" , "#4dffc3" ],
+	[ "#79b5d2" , "#4dc3ff" ],
+	[ "#7979d2" , "#4d4dff" ],
+	[ "#b579d2" , "#c44dff" ],
+    [ "#d279b5" , "#ff4dc3" ]
+    ];
 
     $scope.addSource = function() {
     };

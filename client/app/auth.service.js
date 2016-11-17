@@ -1,16 +1,14 @@
 app.factory('Auth', function($http, $rootScope, $cookieStore, $location) {
     return {
         login(user){
-            var target = "/api/login";
-            return $http.post(target, user)
+            return $http.post("/api/login", user)
                 .then(function(resp) {
                     $rootScope.token = resp.data.token;
                     $cookieStore.put('jwt', resp.data.token);
                 });
         },
         signup(user){
-            var target = "/api/signup";
-            return $http.post(target, user)
+            return $http.post("/api/signup", user)
                 .then(function(resp) {
                     $rootScope.token = resp.data.token;
                     $cookieStore.put('jwt', resp.data.token);

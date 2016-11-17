@@ -55,7 +55,8 @@ function loadTable(){
         for(var j = 0; j<numRows; j++) {
             source_text = data[k].children[data[k].selectedIndex].text;
             row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
-            row.cells[j].style.backgroundColor = colors[k%7];
+            row.cells[j].data("inOn","0")
+            row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].data("inOn"))];
             k++;
         }
     }
@@ -93,11 +94,20 @@ var source_array = [
     {value: "usr1", text: "API 2"},
     {value: "usr2", text: "API 3"},
     {value: "usr3", text: "API 4"},
-		{value: "del", text: "Delete Source"}
+    {value: "del", text: "Delete Source"}
 ]
 
-//Array for base colors of Cells
-var colors = ["red","orange","yellow","green","blue","indigo","violet"]
+var colors = [ //[off,on]
+	[ "#d27979" , "#ff4d4d" ],
+	[ "#d2b579" , "#ffc34d" ],
+	[ "#b5d279" , "#c3ff4d" ],
+	[ "#79d279" , "#4dff4d" ],
+	[ "#79d2b5" , "#4dffc3" ],
+	[ "#79b5d2" , "#4dc3ff" ],
+	[ "#7979d2" , "#4d4dff" ],
+	[ "#b579d2" , "#c44dff" ],
+    [ "#d279b5" , "#ff4dc3" ]
+    ];
 
 /***************************************************
 projects = document.getElementById("projects");
