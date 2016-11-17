@@ -192,8 +192,8 @@ document.getElementById("more").addEventListener('click', function() {
 
 var todayWeLie = false;
 document.getElementById("attribution").addEventListener('click', function() {
-    todayWeLie = true;
-    setInterval(function() { refreshSources(); }, 500);
+    todayWeLie = !todayWeLie;
+    if (todayWeLie) { setInterval(function() { refreshSources(); }, 500); }
 })
 
 //Greeting User
