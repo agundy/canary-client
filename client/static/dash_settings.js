@@ -80,6 +80,45 @@ function removeSources() {
     }			
 }
 
+/*******************************************
+Blinks the "light" (color) of a Cell in 
+the Table
+********************************************/
+function blink_cell(cell) {
+    cell_light_off(cell);
+		window.setTimeout(cell_light_on(cell),500);
+}
+
+/*******************************************
+Sets the color of a Cell to its on state
+********************************************/
+function cell_light_on(cell) {
+    var offColor = cell.style.backgroundColor;
+    var onColor;
+    for(var i = 0; i< colors.length; i++) {
+        if(offColor == colors[i][0]) {
+            onColor = colors[i][1];
+            break;
+				}
+		}
+    cell.style.backgroundColor = onColor;
+}
+
+/*******************************************
+Sets the color of a Cell to its off state
+********************************************/
+function cell_light_off(cell) {
+    var onColor = cell.style.backgroundColor;
+    var offColor;
+    for(var i = 0; i< colors.length; i++) {
+        if(offColor == colors[i][1]) {
+            onColor = colors[i][0];
+            break;
+				}
+		}
+    cell.style.backgroundColor = offColor;
+}
+
 //Array for projects selection options
 var project_array = [{value: 0, text: "Canary"}]
 
