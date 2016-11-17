@@ -55,9 +55,18 @@ function loadTable(){
         for(var j = 0; j<numRows; j++) {
             source_text = data[k].children[data[k].selectedIndex].text;
             row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
-            row.cells[j].data("inOn","0")
-            row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].data("inOn"))];
+            row.cells[j].dataset.inOn = "0";
+            if (!todayWeLie){ 
+                row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].dataset.inOn)];
+            } else{
+                if (Math.random()<.2) {
+                    row.cells[j].style.backgroundColor = colors[k%9][1];
+                } else{
+                    row.cells[j].style.backgroundColor = colors[k%9][0];
+                }
+            }
             k++;
+    
         }
     }
 }
@@ -140,6 +149,13 @@ document.getElementById("gear").addEventListener('click', function() {
 document.getElementById("more").addEventListener('click', function() {
     alert("Access Denied. Please contact your project administrator.");
 }, false);
+
+
+var todayWeLie = false;
+document.getElementById("attribution").addEventListener('click', function() {
+    todayWeLie = true;
+    setInterval(function() { refreshSources(); }, 500);
+})
 
 //Greeting User
 var greeting = document.getElementById("name");
