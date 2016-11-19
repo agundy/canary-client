@@ -32,9 +32,14 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http, Project
     $scope.refreshSources = function() {
     };
 
-    $http.get('/api/project').then(function(resp){
-        $scope.projects = resp.data;
-    });
-    console.log(Project.query());
-    console.log("Test");
+    $scope.projects = Project.query();
+    
+    $scope.addProject = function(){
+        var project = {
+            name: "Project X"
+        };
+        Project.save(project, function(){
+            $scope.projects = Project.query();
+        });
+    };
 });

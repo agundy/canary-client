@@ -10,7 +10,7 @@
             <p ng-repeat="p in projects">
             {{ p.name }}
             </p>
-            <button type="button" id="more">More Projects</button>
+            <button type="button" ng-click="addProject()">Add Project</button>
             <br><br>
             <h3>Data Sources</h3>
             <div id="sources">
@@ -28,5 +28,5 @@
         </table>
     </div>
 </div>
-        <script src="/static/dash_settings.js"></script>
 
+<script src="/static/dash_settings.js"></script>
