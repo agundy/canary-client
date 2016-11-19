@@ -97,14 +97,9 @@ Blinks the "light" (color) of Cells in
 the Table for a given data source
 ********************************************/
 function blink_source(e) {
-    var source_cells = document.getElementsByClassName(e);
-    //multi_cell_light(this.innerHTML,source_cells,1);
-		c = source_cells[0];
-		console.log(c.style.backgroundColor);
-		source_light_on(this.innerHTML,c);
-		console.log(c.style.backgroundColor);
-		//setTimeout(source_light_off(this.innerHTML,c),1000);
-		//setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
+    var source_cells = document.getElementsByClassName(this.className);
+    multi_cell_light(this.innerHTML,source_cells,1);
+		setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
 }
 
 function multi_cell_light(source,cells,state) {
