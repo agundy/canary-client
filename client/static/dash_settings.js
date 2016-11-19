@@ -49,7 +49,6 @@ function loadTable(){
     var data = sources.children;
     var numRows = Math.ceil(Math.sqrt(data.length));
     var k = 0;
-    var del_source = [];
     for(var i = 0; i<numRows; i++) {
         var row = table.insertRow(table.rows.length)
         for(var j = 0; j<numRows; j++) {
@@ -95,7 +94,12 @@ the Table
 ********************************************/
 function blink_cell(cell) {
     cell_light_off(cell);
-		window.setTimeout(cell_light_on(cell),500);
+    setTimeout(cell_light_on(cell),500);
+}
+
+function blink_source(source) {
+    source_light_off(source);
+    setTimeout(source_light_on(source),500);
 }
 
 /*******************************************
@@ -114,6 +118,25 @@ function cell_light_on(cell) {
 }
 
 /*******************************************
+Sets the color of a Cell to its on state for
+a given data source
+********************************************/
+function source_light_on(source) {
+    table = document.getElementById("dash_table");
+    sources = document.getElementById("sources");
+    var data = sources.children;
+    var numRows = Math.ceil(Math.sqrt(data.length));
+		var onColor;
+		for(var i = 0; i<data.length; i++) {
+        if(source == data[i].selectedIndex.text) {
+						onColor = colors[i%9][0];
+						break;
+        }
+    }
+    table.rows[Math.ceil(i/numrows)].style.backgroundColor = onColor;
+}
+
+/*******************************************
 Sets the color of a Cell to its off state
 ********************************************/
 function cell_light_off(cell) {
@@ -126,6 +149,25 @@ function cell_light_off(cell) {
 				}
 		}
     cell.style.backgroundColor = offColor;
+}
+
+/*******************************************
+Sets the color of a Cell to its off state for
+a given data source
+********************************************/
+function source_light_off(source) {
+    table = document.getElementById("dash_table");
+    sources = document.getElementById("sources");
+    var data = sources.children;
+    var numRows = Math.ceil(Math.sqrt(data.length));
+		var offColor;
+		for(var i = 0; i<data.length; i++) {
+        if(source == data[i].selectedIndex.text) {
+				    offColor = colors[i%9][1];
+						break;
+        }
+    }
+    table.rows[Math.ceil(i/numrows)].style.backgroundColor = offColor;
 }
 
 //Array for projects selection options
