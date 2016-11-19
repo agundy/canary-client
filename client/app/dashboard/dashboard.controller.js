@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
+app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
     $scope.source_array = [
         {value: "404", text: "404"},
         {value: "d404", text: "404 Rate"},
@@ -32,8 +32,15 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
     $scope.refreshSources = function() {
     };
 
-    $http.get('/api/project').then(function(resp){
-        $scope.projects = resp.data;
-    });
-
+    $scope.projects = Project.query();
+    $scope.user = User.me();
+    
+    $scope.addProject = function(){
+        var project = {
+            name: "Project X"
+        };
+        Project.save(project, function(){
+            $scope.projects = Project.query();
+        });
+    };
 });
