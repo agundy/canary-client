@@ -44,6 +44,13 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     $scope.newProject = {
         name : ""
     };
+    $scope.newToken = function(project) {
+        project.$regenToken({}, function(){ 
+            $scope.projects = Project.query({}, function(){
+                $scope.selectedProject = $scope.projects[$scope.projects.length - 1];
+            });
+        });
+    };
     
     $scope.selectProject = function(project) {
         $scope.selectedProject = project;
