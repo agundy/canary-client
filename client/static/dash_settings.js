@@ -99,11 +99,8 @@ the Table for a given data source
 ********************************************/
 function blink_source(e) {
     var source_cells = document.getElementsByClassName(e);
-    //multi_cell_light(this.innerHTML,source_cells,1);
-		console.log(typeof(source_cells[0]));
-		source_light_on(e,source_cells[0]);
-		setTimeout(source_light_off(e),1000);
-		//setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
+    source_light_on(e);
+    setTimeout(source_light_off(e),1000);
 }
 
 /*******************************************
