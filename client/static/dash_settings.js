@@ -175,11 +175,11 @@ var project_array = [{value: 0, text: "Canary"}]
 
 //Array for data source selection options
 var source_array = [
-    {value: "404", text: "404"},
-    {value: "d404", text: "404 Rate"},
-    {value: "lod", text: "Page Loads"},
-    {value: "dlod", text: "Page Load Rate"},
-    {value: "lat", text: "Latency"},
+    {value: "lod", text: "Page Load"},
+    {value: "400", text: "400: Bad Request"},
+    {value: "403", text: "403: Access Denied"},
+    {value: "404", text: "404: Not Found"},
+    {value: "500", text: "500: Server Error"},
     {value: "usr0", text: "API 1"},
     {value: "usr1", text: "API 2"},
     {value: "usr2", text: "API 3"},
