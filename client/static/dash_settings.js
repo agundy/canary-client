@@ -56,7 +56,9 @@ function loadTable(){
             row.insertCell(j).innerHTML = source_text;
             row.cells[j].className = source_text;
             row.cells[j].dataset.inOn = "0";
-						row.cells[j].addEventListener("click",function() { blink_source();},false);
+						row.cells[j].addEventListener("click", function() {
+                            blink_source();
+                        },false);
             if (!todayWeLie){ 
                 row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].dataset.inOn)];
             } else{
