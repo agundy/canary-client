@@ -56,7 +56,9 @@ function loadTable(){
             row.insertCell(j).innerHTML = source_text;
             row.cells[j].className = source_text;
             row.cells[j].dataset.inOn = "0";
-						row.cells[j].addEventListener("click",function() { blink_source();},false);
+						row.cells[j].addEventListener("click", function() {
+                            blink_source(source_text);
+                        },false);
             if (!todayWeLie){ 
                 row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].dataset.inOn)];
             } else{
@@ -95,7 +97,7 @@ Blinks the "light" (color) of Cells in
 the Table for a given data source
 ********************************************/
 function blink_source(e) {
-    var source_cells = document.getElementsByClassName(this.innerHTML);
+    var source_cells = document.getElementsByClassName(e);
     //multi_cell_light(this.innerHTML,source_cells,1);
 		c = source_cells[0];
 		console.log(c.style.backgroundColor);
