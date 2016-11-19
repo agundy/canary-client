@@ -97,9 +97,9 @@ the Table for a given data source
 function blink_source(e) {
     var source_cells = document.getElementsByClassName(this.innerHTML);
     //multi_cell_light(this.innerHTML,source_cells,1);
-		console.log(typeof(source_cells[0]));
 		source_light_on(this.innerHTML,source_cells[0]);
 		setTimeout(source_light_off(this.innerHTML,source_cells[0]),1000);
+		console.log(this.innerHTML == this.className);
 		//setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
 }
 
