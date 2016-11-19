@@ -54,6 +54,7 @@ function loadTable(){
         for(var j = 0; j<numRows; j++) {
             source_text = data[k].children[data[k].selectedIndex].text;
             row.insertCell(j).innerHTML = source_text;
+            row.cells[j].className = source_text;
             row.cells[j].dataset.inOn = "0";
 						row.cells[j].addEventListener("click",blink_source,false);
             if (!todayWeLie){ 
@@ -90,12 +91,30 @@ function removeSources() {
 }
 
 /*******************************************
-Blinks the "light" (color) of a Cell in 
+Blinks the "light" (color) of Cells in 
 the Table for a given data source
 ********************************************/
 function blink_source(e) {
-    setTimeout(source_light_on(this.innerHTML,this),1000);
-    source_light_off(this.innerHTML,this);
+    var source_cells = document.getElementsByClassName(this.innerHTML);
+    //multi_cell_light(this.innerHTML,source_cells,1);
+		console.log(typeof(source_cells[0]));
+		source_light_on(this.innerHTML,source_cells[0]);
+		setTimeout(source_light_off(this.innerHTML,source_cells[0]),1000);
+		//setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
+}
+
+function multi_cell_light(source,cells,state) {
+    console.log(state%2);
+    if(state%2 == 0) {
+        for(var i = 0; i<cells; i++) {
+            source_light_off(source,cells[i]);
+        }  
+    }
+		else {
+        for(var i = 0; i<cells; i++) {
+            source_light_on(source,cells[i]);
+        }
+    }
 }
 
 /*******************************************
@@ -123,7 +142,7 @@ function source_light_off(source,cell) {
     var data = sources.children;
     var numRows = Math.ceil(Math.sqrt(data.length));
 		for(var i = 0; i<data.length; i++) {
-        if(source == data[i].selectedIndex.text) {
+        if(source == data[i].children[data[i].selectedIndex].text) {
             cell.style.backgroundColor = colors[i%9][0];
 						break;
         }
