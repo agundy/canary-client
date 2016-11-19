@@ -1,10 +1,12 @@
 app.factory('Project', function($resource){
     return $resource('/api/project/:id/:controller', {
-        'id': '@_id'
+        'id': '@id'
     }, {
-        method: 'PUT',
-        params: {
-            controller: 'regentoken'
+        regenToken: {
+            method: 'PUT',
+            params: {
+                controller: 'regentoken'
+            }
         }
     });
 });

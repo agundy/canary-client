@@ -19,14 +19,15 @@
         <div ng-show="showSelector" id="project_selector">
             <h1>Projects:</h1><br>
             <div id="projects">
-                <div ng-repeat="p in projects" ng-mouseenter="p.showToken = true" ng-mouseleave="p.showToken = false">
+                <div ng-repeat="p in projects">
                     <h3 ng-click="selectProject(p)">{{p.name}}</h3>
                 </div>
             </div>
             <br>
             <button class="psubmit" type="button" ng-click="addProject()">Add Project</button>
             <input class="psubmit" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
-            <h3>Current Project API Token: {{selectedProject.Token}}</h3>
+            <h3>Current Project API Token:<br>{{selectedProject.Token}}</h3>
+            <button class="psubmit" type="button" ng-click="newToken(selectedProject)">Regenerate Token</button>
         </div>
         <div id="attribution">
             Canary Project, 2016
