@@ -22,6 +22,10 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
 	[ "#b579d2" , "#c44dff" ],
     [ "#d279b5" , "#ff4dc3" ]
     ];
+    
+    $scope.showSelector = false;
+    
+    $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
 
     $scope.addSource = function() {
     };
