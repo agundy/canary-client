@@ -8,7 +8,6 @@
             <h3>Currently viewing:</h3>
             <h3 id="pnam">{{projects[0].name}}</h3>
             <button type="button" id="more" ng-click="toggleSelector()">Projects</button>
-            <button type="button" ng-click="addProject()">Add Project</button>
             <br><br>
             <h3>Data Sources</h3>
             <div id="sources">
@@ -18,10 +17,12 @@
             <img class="controller" id="gear" src="/static/gear.svg"></img>
         </div>
         <div ng-show="showSelector" id="project_selector">
+            <h1>Projects:</h1>
             <div id="projects" ng-repeat="p in projects">
-                <h1>Projects:</h1>
-                {{p.name}}
+                <h3>{{p.name}}</h3>
             </div>
+            <button type="button" ng-click="addProject()">Add Project</button>
+            <input class="in" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
         </div>
         <div id="attribution">
             Canary Project, 2016

@@ -10,7 +10,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
         {value: "usr2", text: "API 3"},
         {value: "usr3", text: "API 4"}
     ];
-
+    
     $scope.colors = [ //(on,off)
 	[ "#d27979" , "#ff4d4d" ],
 	[ "#d2b579" , "#ffc34d" ],
@@ -39,12 +39,17 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     $scope.projects = Project.query();
     $scope.user = User.me();
     
+    $scope.newProject = {
+        name : ""
+    };
     $scope.addProject = function(){
-        var project = {
-            name: "Project X"
-        };
-        Project.save(project, function(){
-            $scope.projects = Project.query();
-        });
+        if ($scope.newProject.name != "") {
+            var project = {
+                name: $scope.newProject.name
+            };
+            Project.save(project, function(){
+                $scope.projects = Project.query();
+            });
+        }
     };
 });
