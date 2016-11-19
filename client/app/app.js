@@ -1,6 +1,7 @@
 var app = angular.module('app', [
         'ngRoute',
-        'ngCookies'
+        'ngCookies',
+        'ngResource'
 ])
 .config(function($routeProvider, $locationProvider, $httpProvider){
     $locationProvider.html5Mode(true);

@@ -2,12 +2,13 @@
     <div id="settings">
         <div id="greeting">
             <img id="logo" src="/static/logo.png"></img>
-            <h2 id="name">Hello, User!</h2>
+            <h2 id="name">Hello, {{ user.name }}!</h2>
         </div>
         <div id="project_settings">
             <h3>Currently viewing:</h3>
             <h3 id="pnam">{{projects[0].name}}</h3>
             <button type="button" id="more" ng-click="toggleSelector()">Projects</button>
+            <button type="button" ng-click="addProject()">Add Project</button>
             <br><br>
             <h3>Data Sources</h3>
             <div id="sources">
@@ -31,5 +32,5 @@
         </table>
     </div>
 </div>
-        <script src="/static/dash_settings.js"></script>
 
+<script src="/static/dash_settings.js"></script>
