@@ -56,16 +56,17 @@ function loadTable(){
             row.insertCell(j).innerHTML = source_text;
             row.cells[j].className = source_text;
             row.cells[j].dataset.inOn = "0";
+            row.cells[j].dataset.colorIndex = String(k%9);
 						row.cells[j].addEventListener("click", function() {
                             blink_source(source_text);
                         },false);
             if (!todayWeLie){ 
-                row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].dataset.inOn)];
+                row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][Number(row.cells[j].dataset.inOn)];
             } else{
                 if (Math.random()<.2) {
-                    row.cells[j].style.backgroundColor = colors[k%9][1];
+                    row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][1];
                 } else{
-                    row.cells[j].style.backgroundColor = colors[k%9][0];
+                    row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][0];
                 }
             }
             k++;
@@ -101,37 +102,18 @@ function blink_source(e) {
     //multi_cell_light(this.innerHTML,source_cells,1);
 		console.log(typeof(source_cells[0]));
 		source_light_on(e,source_cells[0]);
-		setTimeout(source_light_off(e,source_cells[0]),1000);
+		setTimeout(source_light_off(e),1000);
 		//setTimeout(multi_cell_light(this.innerHTML,source_cells,0),1000);
-}
-
-function multi_cell_light(source,cells,state) {
-    console.log(state%2);
-    if(state%2 == 0) {
-        for(var i = 0; i<cells; i++) {
-            source_light_off(source,cells[i]);
-        }  
-    }
-		else {
-        for(var i = 0; i<cells; i++) {
-            source_light_on(source,cells[i]);
-        }
-    }
 }
 
 /*******************************************
 Sets the color of a Cell to its on state for
 a given data source
 ********************************************/
-function source_light_on(source,cell) {
-    sources = document.getElementById("sources");
-    var data = sources.children;
-    var numRows = Math.ceil(Math.sqrt(data.length));
-		for(var i = 0; i<data.length; i++) {
-        if(source == data[i].children[data[i].selectedIndex].text) {
-						cell.style.backgroundColor = colors[i%9][1];
-						break;
-        }
+function source_light_on(someClass) {
+    var cells = document.getElementsByClassName(someClass);
+    for (var i = 0; i < cells.length; i++) { 
+        cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][1];
     }
 }
 
@@ -139,15 +121,10 @@ function source_light_on(source,cell) {
 Sets the color of a Cell to its off state for
 a given data source
 ********************************************/
-function source_light_off(source,cell) {
-    sources = document.getElementById("sources");
-    var data = sources.children;
-    var numRows = Math.ceil(Math.sqrt(data.length));
-		for(var i = 0; i<data.length; i++) {
-        if(source == data[i].children[data[i].selectedIndex].text) {
-            cell.style.backgroundColor = colors[i%9][0];
-						break;
-        }
+function source_light_off(someClass) {
+    var cells = document.getElementsByClassName(someClass);
+    for (var i = 0; i < cells.length; i++) { 
+        cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][0];
     }
 }
 
