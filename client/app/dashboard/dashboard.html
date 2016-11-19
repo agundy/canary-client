@@ -17,10 +17,11 @@
             <img class="controller" id="gear" src="/static/gear.svg"></img>
         </div>
         <div ng-show="showSelector" id="project_selector">
-            <h1>Projects:</h1>
+            <h1>Projects:</h1><br>
             <div id="projects" ng-repeat="p in projects">
-                <h3>{{p.name}}</h3>
+                <h3>{{p.name}}</h3><br>
             </div>
+            <br>
             <button type="button" ng-click="addProject()">Add Project</button>
             <input class="in" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
         </div>
