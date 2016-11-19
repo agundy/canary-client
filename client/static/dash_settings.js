@@ -191,7 +191,7 @@ document.getElementById("more").addEventListener('click', function() {
 
 
 var todayWeLie = false;
-document.getElementById("attribution").addEventListener('click', function() {
+document.getElementById("logo").addEventListener('click', function() {
     todayWeLie = !todayWeLie;
     if (todayWeLie) { setInterval(function() { refreshSources(); }, 500); }
 })
