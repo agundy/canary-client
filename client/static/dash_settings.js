@@ -243,10 +243,6 @@ document.getElementById("gear").addEventListener('click', function() {
     refreshSources();
 }, false);
 
-//Click event listener for viewing other projects
-document.getElementById("more").addEventListener('click', function() {
-    alert("Access Denied. Please contact your project administrator.");
-}, false);
 
 
 var todayWeLie = false;

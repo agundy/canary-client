@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
+app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
     $scope.source_array = [
         {value: "404", text: "404"},
         {value: "d404", text: "404 Rate"},
@@ -10,7 +10,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
         {value: "usr2", text: "API 3"},
         {value: "usr3", text: "API 4"}
     ];
-
+    
     $scope.colors = [ //(on,off)
 	[ "#d27979" , "#ff4d4d" ],
 	[ "#d2b579" , "#ffc34d" ],
@@ -22,6 +22,10 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
 	[ "#b579d2" , "#c44dff" ],
     [ "#d279b5" , "#ff4dc3" ]
     ];
+    
+    $scope.showSelector = false;
+    
+    $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
 
     $scope.addSource = function() {
     };
@@ -32,8 +36,20 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http) {
     $scope.refreshSources = function() {
     };
 
-    $http.get('/api/project').then(function(resp){
-        $scope.projects = resp.data;
-    });
-
+    $scope.projects = Project.query();
+    $scope.user = User.me();
+    
+    $scope.newProject = {
+        name : ""
+    };
+    $scope.addProject = function(){
+        if ($scope.newProject.name != "") {
+            var project = {
+                name: $scope.newProject.name
+            };
+            Project.save(project, function(){
+                $scope.projects = Project.query();
+            });
+        }
+    };
 });
