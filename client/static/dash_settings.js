@@ -108,7 +108,7 @@ a given data source
 ********************************************/
 function source_light_on(someClass) {
     var cells = document.getElementsByClassName(someClass);
-    console(cells.length);
+    console.log(someclass + cells.len)
     for (var i = 0; i < cells.length; i++) { 
         cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][1];
     }
