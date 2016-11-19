@@ -6,7 +6,7 @@
         </div>
         <div id="project_settings">
             <h3>Currently viewing:</h3>
-            <h3 id="pnam">{{projects[0].name}}</h3>
+            <h3>{{selectedProject.name}}</h3>
             <button type="button" id="more" ng-click="toggleSelector()">Projects</button>
             <br><br>
             <h3>Data Sources</h3>
@@ -18,12 +18,15 @@
         </div>
         <div ng-show="showSelector" id="project_selector">
             <h1>Projects:</h1><br>
-            <div id="projects" ng-repeat="p in projects">
-                <h3>{{p.name}}</h3>
+            <div id="projects">
+                <div ng-repeat="p in projects" ng-mouseenter="p.showToken = true" ng-mouseleave="p.showToken = false">
+                    <h3 ng-click="selectProject(p)">{{p.name}}</h3>
+                </div>
             </div>
             <br>
-            <button type="button" ng-click="addProject()">Add Project</button>
-            <input class="in" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
+            <button class="psubmit" type="button" ng-click="addProject()">Add Project</button>
+            <input class="psubmit" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
+            <h3>Current Project API Token: {{selectedProject.Token}}</h3>
         </div>
         <div id="attribution">
             Canary Project, 2016

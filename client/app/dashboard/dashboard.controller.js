@@ -36,12 +36,20 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     $scope.refreshSources = function() {
     };
 
-    $scope.projects = Project.query();
+    $scope.projects = Project.query({}, function(){
+        $scope.selectedProject = $scope.projects[0];
+    });
     $scope.user = User.me();
     
     $scope.newProject = {
         name : ""
     };
+    
+    $scope.selectProject = function(project) {
+        $scope.selectedProject = project;
+        console.log($scope.selectedProject);
+    }
+    
     $scope.addProject = function(){
         if ($scope.newProject.name != "") {
             var project = {
