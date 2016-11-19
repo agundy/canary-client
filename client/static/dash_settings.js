@@ -91,38 +91,11 @@ function removeSources() {
 
 /*******************************************
 Blinks the "light" (color) of a Cell in 
-the Table
-********************************************/
-function blink_cell(e) {
-    cell_light_off(this);
-    setTimeout(cell_light_on(this),500);
-}
-
-/*******************************************
-Blinks the "light" (color) of a Cell in 
-the Table given a source
+the Table for a given data source
 ********************************************/
 function blink_source(e) {
     setTimeout(source_light_on(this.innerHTML,this),1000);
     source_light_off(this.innerHTML,this);
-}
-
-/*******************************************
-Sets the color of a Cell to its on state
-********************************************/
-function cell_light_on(cell) {
-    /*
-		var offColor = this.style.backgroundColor;
-    var onColor;
-    for(var i = 0; i<colors.length; i++) {
-        if(offColor == colorsRGB[i][0]) {
-            onColor = colors[i][1];
-            break;
-				}
-		}
-    this.style.backgroundColor = onColor;
-    */
-		source_light_on(cell.innerHTML);
 }
 
 /*******************************************
@@ -139,24 +112,6 @@ function source_light_on(source,cell) {
 						break;
         }
     }
-}
-
-/*******************************************
-Sets the color of a Cell to its off state
-********************************************/
-function cell_light_off(cell) {
-    /*
-		var onColor = cell.style.backgroundColor;
-    var offColor;
-    for(var i = 0; i< colors.length; i++) {
-        if(offColor == colors[i][0]) {
-            onColor = colors[i][0];
-            break;
-				}
-		}
-    cell.style.backgroundColor = offColor;
-		*/
-		source_light_off(cell.innerHTML);
 }
 
 /*******************************************
@@ -204,18 +159,6 @@ var colors = [ //[off,on]
     [ "#d279b5" , "#ff4dc3" ]
     ];
 
-/***************************************************
-projects = document.getElementById("projects");
-var proj_selector = document.createElement("select")
-proj_selector.classList = ["sources"];
-for (var i = 0; i < project_array.length; i += 1) {
-    option = document.createElement('option');
-    option.setAttribute('value', project_array[i].value);
-    option.appendChild(document.createTextNode(project_array[i].text));
-    proj_selector.appendChild(option);
-}
-projects.appendChild(proj_selector);
-***************************************************/
 //Click event listener for add data source selection button
 document.getElementById("plus").addEventListener('click', function() {
     addSource();
