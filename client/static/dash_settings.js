@@ -53,8 +53,9 @@ function loadTable(){
         var row = table.insertRow(table.rows.length)
         for(var j = 0; j<numRows; j++) {
             source_text = data[k].children[data[k].selectedIndex].text;
-            row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
+            row.insertCell(j).innerHTML = source_text;
             row.cells[j].dataset.inOn = "0";
+						row.cells[j].addEventListener("click",blink_source,false);
             if (!todayWeLie){ 
                 row.cells[j].style.backgroundColor = colors[k%9][Number(row.cells[j].dataset.inOn)];
             } else{
@@ -92,82 +93,86 @@ function removeSources() {
 Blinks the "light" (color) of a Cell in 
 the Table
 ********************************************/
-function blink_cell(cell) {
-    cell_light_off(cell);
-    setTimeout(cell_light_on(cell),500);
+function blink_cell(e) {
+    cell_light_off(this);
+    setTimeout(cell_light_on(this),500);
 }
 
-function blink_source(source) {
-    source_light_off(source);
-    setTimeout(source_light_on(source),500);
+/*******************************************
+Blinks the "light" (color) of a Cell in 
+the Table given a source
+********************************************/
+function blink_source(e) {
+    setTimeout(source_light_on(this.innerHTML,this),1000);
+    source_light_off(this.innerHTML,this);
 }
 
 /*******************************************
 Sets the color of a Cell to its on state
 ********************************************/
 function cell_light_on(cell) {
-    var offColor = cell.style.backgroundColor;
+    /*
+		var offColor = this.style.backgroundColor;
     var onColor;
-    for(var i = 0; i< colors.length; i++) {
-        if(offColor == colors[i][0]) {
+    for(var i = 0; i<colors.length; i++) {
+        if(offColor == colorsRGB[i][0]) {
             onColor = colors[i][1];
             break;
 				}
 		}
-    cell.style.backgroundColor = onColor;
+    this.style.backgroundColor = onColor;
+    */
+		source_light_on(cell.innerHTML);
 }
 
 /*******************************************
 Sets the color of a Cell to its on state for
 a given data source
 ********************************************/
-function source_light_on(source) {
-    table = document.getElementById("dash_table");
+function source_light_on(source,cell) {
     sources = document.getElementById("sources");
     var data = sources.children;
     var numRows = Math.ceil(Math.sqrt(data.length));
-		var onColor;
 		for(var i = 0; i<data.length; i++) {
-        if(source == data[i].selectedIndex.text) {
-						onColor = colors[i%9][0];
+        if(source == data[i].children[data[i].selectedIndex].text) {
+						cell.style.backgroundColor = colors[i%9][1];
 						break;
         }
     }
-    table.rows[Math.ceil(i/numrows)].style.backgroundColor = onColor;
 }
 
 /*******************************************
 Sets the color of a Cell to its off state
 ********************************************/
 function cell_light_off(cell) {
-    var onColor = cell.style.backgroundColor;
+    /*
+		var onColor = cell.style.backgroundColor;
     var offColor;
     for(var i = 0; i< colors.length; i++) {
-        if(offColor == colors[i][1]) {
+        if(offColor == colors[i][0]) {
             onColor = colors[i][0];
             break;
 				}
 		}
     cell.style.backgroundColor = offColor;
+		*/
+		source_light_off(cell.innerHTML);
 }
 
 /*******************************************
 Sets the color of a Cell to its off state for
 a given data source
 ********************************************/
-function source_light_off(source) {
-    table = document.getElementById("dash_table");
+function source_light_off(source,cell) {
     sources = document.getElementById("sources");
     var data = sources.children;
     var numRows = Math.ceil(Math.sqrt(data.length));
-		var offColor;
 		for(var i = 0; i<data.length; i++) {
         if(source == data[i].selectedIndex.text) {
-				    offColor = colors[i%9][1];
+            cell.style.backgroundColor = colors[i%9][0];
 						break;
         }
     }
-    table.rows[Math.ceil(i/numrows)].style.backgroundColor = offColor;
 }
 
 //Array for projects selection options
@@ -198,6 +203,18 @@ var colors = [ //[off,on]
 	[ "#b579d2" , "#c44dff" ],
     [ "#d279b5" , "#ff4dc3" ]
     ];
+
+var colorsRGB = [ //[off,on]
+    ["rgb(210, 121, 121)", "rgb(255, 77, 77)"],
+    ["rgb(210, 181, 121)", "rgb(255, 195, 77"],
+		["rgb(181, 210, 121)", "rgb(195, 255, 77)"],
+		["rgb(121, 210, 121)", "rgb(77, 255, 77)"],
+		["rgb(121, 210, 181)", "rgb(77, 255, 195)"],
+		["rgb(121, 181, 210)", "rgb(77, 195, 255)"],
+		["rgb(121, 121, 210)", "rgb(77, 77, 255)"],
+		["rgb(181, 121, 210)", "rgb(195, 77, 255)"],
+		["rgb(210, 121, 181)", "rgb(255, 77, 195)"]
+		];
 
 /***************************************************
 projects = document.getElementById("projects");
