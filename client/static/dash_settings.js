@@ -52,7 +52,7 @@ function loadTable(){
     for(var i = 0; i<numRows; i++) {
         var row = table.insertRow(table.rows.length)
         for(var j = 0; j<numRows; j++) {
-            source_text = data[k].children[data[k].selectedIndex].text;
+            source_text = data[k].children[data[k].selectedIndex].value;
             row.insertCell(j).innerHTML = source_text;
             row.cells[j].className = source_text;
             row.cells[j].dataset.inOn = "0";
