@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, $location, Auth, $http, Project) {
+app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
     $scope.source_array = [
         {value: "404", text: "404"},
         {value: "d404", text: "404 Rate"},
@@ -33,6 +33,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, $http, Project
     };
 
     $scope.projects = Project.query();
+    $scope.user = User.me();
     
     $scope.addProject = function(){
         var project = {
