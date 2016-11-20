@@ -53,13 +53,13 @@ function loadTable(){
         var row = table.insertRow(table.rows.length)
         for(var j = 0; j<numRows; j++) {
             source_text = data[k].children[data[k].selectedIndex].value;
-            row.insertCell(j).innerHTML = source_text;
+            row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
             row.cells[j].className = (' ' + source_text).slice(1);
             row.cells[j].dataset.inOn = "0";
             row.cells[j].dataset.colorIndex = String(k%9);
-						row.cells[j].addEventListener("click", function() {
-                            blink_source(e.className);
-                        },false);
+                row.cells[j].addEventListener("click", function() {
+                    blink_source(this.className);
+                },false);
             if (!todayWeLie){ 
                 row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][Number(row.cells[j].dataset.inOn)];
             } else{
@@ -70,6 +70,7 @@ function loadTable(){
                 }
             }
             k++;
+            if (k== data.length) { return;}
     
         }
     }
@@ -99,7 +100,7 @@ the Table for a given data source
 ********************************************/
 function blink_source(e) {
     source_light_on(e);
-    setTimeout(source_light_off(e),1000);
+    setTimeout(function() { source_light_off(e); },1000);
 }
 
 /*******************************************
@@ -108,8 +109,8 @@ a given data source
 ********************************************/
 function source_light_on(someClass) {
     var cells = document.getElementsByClassName(someClass);
-    console.log(someClass + cells.length)
     for (var i = 0; i < cells.length; i++) { 
+        console.log(cells[i].style.backgroundColor + " " + colors[Number(cells[i].dataset.colorIndex)][1]);
         cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][1];
     }
 }
