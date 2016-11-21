@@ -1,5 +1,6 @@
 <div id="login" >
     <form ng-show="!modeRegister" ng-submit="login()" id="auth">
+        <p id="alert">Incorrect email or password</p>
         <div id ="forms">
             <input class="in" type="email" placeholder="Enter Email" name="email" ng-model="loginUser.email" required>
             <input class="in" type="password" placeholder="Enter Password" name="password" ng-model="loginUser.password" required>

@@ -3,6 +3,11 @@ body {
     background-repeat: repeat-x repeat-y;
 }
 
+#alert {
+    visibility: hidden;
+		margin: 0 auto;
+}
+
 #login {
     display: flex;
     background: linear-gradient(0deg,rgba(1,1,1,.5),rgba(1,1,1,.5));
