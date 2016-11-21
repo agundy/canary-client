@@ -28,7 +28,8 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
                 $scope.badCreds = false;
                 $location.path('/dashboard');
             }, function(rej) {
-                if(rej.data == "Error logging in") {
+						    console.log(rej);
+                if(rej.status == 500) {
 								    $scope.badCreds = true;
                 }
             });
