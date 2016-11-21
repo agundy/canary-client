@@ -117,7 +117,10 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
         $scope.poll();
-        if ($scope.shouldToggle == false) { $interval(function() { if($scope.updateDash) { $scope.poll;}}, 1000); $scope.shouldToggle = true; };
+        if (!$scope.shouldToggle) { 
+            shouldToggle$interval(function() { if($scope.updateDash) { $scope.poll;}}, 1000);
+            $scope.shouldToggle = true;
+        }
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
             source_light_on($scope.lastEvent.code);
         }
