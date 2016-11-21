@@ -1,5 +1,6 @@
 app.controller('LoginCtrl', function($scope, $location, Auth) {
     $scope.modeRegister = false;
+    $scope.badCreds = false;
 
     $scope.loginUser = {
         email: '',
@@ -15,7 +16,12 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
     $scope.login = function() {
         Auth.login($scope.loginUser)
             .then(function(){
+                $scope.badCreds = false;
                 $location.path('/dashboard');
+            },function(rej) {
+                if(rej.data == "Error logging in") {
+								    $scope.badCreds = true;
+                }
             });
     };
 

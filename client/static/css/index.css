@@ -4,8 +4,8 @@ body {
 }
 
 #alert {
-    visibility: hidden;
 		margin: 0 auto;
+		color: red;
 }
 
 #login {
