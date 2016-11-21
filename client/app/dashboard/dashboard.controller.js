@@ -72,11 +72,11 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
         }
     };
     
-    %scope.poll = function(){
+    $scope.poll = function(){
         $scope.lastEvent = $scope.selectedProject.$pollEvent($scope.lastEvent.id)
     }
     
-    %scope.updateDash = function() { 
+    $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
         $scope.poll();
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
