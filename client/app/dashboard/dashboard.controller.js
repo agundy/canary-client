@@ -1,15 +1,18 @@
 app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
     $scope.source_array = [
-        {value: "404", text: "404"},
-        {value: "d404", text: "404 Rate"},
-        {value: "lod", text: "Page Loads"},
-        {value: "dlod", text: "Page Load Rate"},
-        {value: "lat", text: "Latency"},
+        {value: "200", text: "Page Load"},
+        {value: "400", text: "400: Bad Request"},
+        {value: "403", text: "403: Access Denied"},
+        {value: "404", text: "404: Not Found"},
+        {value: "500", text: "500: Server Error"},
         {value: "usr0", text: "API 1"},
         {value: "usr1", text: "API 2"},
         {value: "usr2", text: "API 3"},
-        {value: "usr3", text: "API 4"}
+        {value: "usr3", text: "API 4"},
+        {value: "del", text: "Delete Source"}
     ];
+    
+    $scope.caughtHTTPcodes = [200, 400, 403, 404, 500];
     
     $scope.colors = [ //(on,off)
 	[ "#d27979" , "#ff4d4d" ],
@@ -38,6 +41,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
 
     $scope.projects = Project.query({}, function(){
         $scope.selectedProject = $scope.projects[0];
+        $scope.lastEvent = $scope.selectedProject.$pollEvent("");
     });
     $scope.user = User.me();
     
@@ -67,4 +71,18 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
             });
         }
     };
+    
+    %scope.poll = function(){
+        $scope.lastEvent = $scope.selectedProject.$pollEvent($scope.lastEvent.id)
+    }
+    
+    %scope.updateDash = function() { 
+        a = $scope.lastEvent.id;
+        $scope.poll();
+        if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
+            source_light_on($scope.lastEvent.code);
+            setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
+        }
+            
+    }
 });
