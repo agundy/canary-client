@@ -13,7 +13,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     ];
     
     $scope.caughtHTTPcodes = [200, 400, 403, 404, 500];
-    
+
+    //Array for Cell colors
     $scope.colors = [ //(on,off)
 	[ "#d27979" , "#ff4d4d" ],
 	[ "#d2b579" , "#ffc34d" ],
@@ -26,24 +27,34 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     [ "#d279b5" , "#ff4dc3" ]
     ];
     
+    //Visibility state of project selection menu
     $scope.showSelector = false;
     
+    //Toggles visibility of project selection menu
     $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
 
+    //Adds new data source to selected project
+    //Currently not ported from dash_settings
     $scope.addSource = function() {
     };
 
+    //Pops last data source from selected project
+    //Currently not ported from dash_settings
     $scope.popSource = function() {
     };
 
+    //Refreshes Tables to reflect changes in dashboard settings
+    //Currently not ported from dash_settings
     $scope.refreshSources = function() {
     };
 
+    //Currently selected project
     $scope.projects = Project.query({}, function(){
         $scope.selectedProject = $scope.projects[0];
     });
     $scope.user = User.me();
     
+
     $scope.lastEvent = {
             "id":0,
             "host":"",
@@ -53,9 +64,13 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
             "project_id":0,
             "timestamp":""
     };
+
+    //Value for new projects credentials
     $scope.newProject = {
         name : ""
     };
+    
+    //Creates a new token for the selected project
     $scope.newToken = function(project) {
         project.$regenToken({}, function(){ 
             $scope.projects = Project.query({}, function(){
@@ -64,11 +79,14 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         });
     };
     
+    //Selects project from project selection menu
     $scope.selectProject = function(project) {
         $scope.selectedProject = project;
         $scope.updateDash();
     };
     
+    //Adds new project if given unique project name
+    //Otherwise, does nothing
     $scope.addProject = function(){
         if ($scope.newProject.name != "") {
             var project = {
