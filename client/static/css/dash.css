@@ -108,3 +108,9 @@ td:hover {
 .source {
     width: 100%;
 }
+
+#cancel {
+    position: absolute;
+    top:0;
+    right:0;
+}
