@@ -41,7 +41,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
 
     $scope.projects = Project.query({}, function(){
         $scope.selectedProject = $scope.projects[0];
-        $scope.lastEvent = $scope.selectedProject.$pollEvent("");
+        $scope.lastEvent = $scope.selectedProject.pollEvent('');
     });
     $scope.user = User.me();
     
@@ -73,7 +73,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     };
     
     $scope.poll = function(){
-        $scope.lastEvent = $scope.selectedProject.$pollEvent($scope.lastEvent.id)
+        $scope.lastEvent = $scope.selectedProject.pollEvent($scope.lastEvent.id);
     }
     
     $scope.updateDash = function() { 
