@@ -143,6 +143,7 @@ var source_array = [
     {value: "del", text: "Delete Source"}
 ]
 
+//Array for Cell colors
 var colors = [ //[off,on]
 	[ "#d27979" , "#ff4d4d" ],
 	[ "#d2b579" , "#ffc34d" ],
@@ -170,17 +171,16 @@ document.getElementById("gear").addEventListener('click', function() {
     refreshSources();
 }, false);
 
-
-
+//Demo for random blinking lights by clicking the logo
 var todayWeLie = false;
 document.getElementById("logo").addEventListener('click', function() {
     todayWeLie = !todayWeLie;
     if (todayWeLie) { setInterval(function() { refreshSources(); }, 500); }
 })
 
-//Greeting User
+//Greeting User based on time of day
 var greeting = document.getElementById("name");
-var name = "User"; //we can probably get the name from th
+var name = "User"; //we can probably get the name
 (new Date().getHours() > 12) ? greeting.innerHTML = "Good Afternoon, "+name+"!" : greeting.innerHTML = "Good Morning, "+name+"!";
 
 //Loads default data source selections to settings
