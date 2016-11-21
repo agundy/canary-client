@@ -118,7 +118,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         a = $scope.lastEvent.id;
         $scope.poll();
         if (!$scope.shouldToggle) { 
-            $interval($scope.poll, 1000);
+            $interval($scope.poll(), 1000);
             $scope.shouldToggle = true;
         }
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
