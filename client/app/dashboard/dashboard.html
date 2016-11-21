@@ -17,6 +17,7 @@
             <img class="controller" id="gear" src="/static/gear.svg"></img>
         </div>
         <div ng-show="showSelector" id="project_selector">
+            <button id="cancel" ng-click="toggleSelector()">X</button>
             <h1>Projects:</h1><br>
             <div id="projects">
                 <div ng-repeat="p in projects">
