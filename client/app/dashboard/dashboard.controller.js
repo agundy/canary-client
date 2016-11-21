@@ -117,7 +117,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
         $scope.poll();
-        if (!angular.isDefined($scope.isPolling)) {
+        if (angular.isUndefined($scope.isPolling)) {
             $scope.isPolling = $interval($scope.poll, 1000);
         }
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
