@@ -1,18 +1,19 @@
-//Controls UI components for dashboard page
-app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
-    //Array for data source selection options
+app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
     $scope.source_array = [
-        {value: "404", text: "404"},
-        {value: "d404", text: "404 Rate"},
-        {value: "lod", text: "Page Loads"},
-        {value: "dlod", text: "Page Load Rate"},
-        {value: "lat", text: "Latency"},
+        {value: "200", text: "Page Load"},
+        {value: "400", text: "400: Bad Request"},
+        {value: "403", text: "403: Access Denied"},
+        {value: "404", text: "404: Not Found"},
+        {value: "500", text: "500: Server Error"},
         {value: "usr0", text: "API 1"},
         {value: "usr1", text: "API 2"},
         {value: "usr2", text: "API 3"},
-        {value: "usr3", text: "API 4"}
+        {value: "usr3", text: "API 4"},
+        {value: "del", text: "Delete Source"}
     ];
     
+    $scope.caughtHTTPcodes = [200, 400, 403, 404, 500];
+
     //Array for Cell colors
     $scope.colors = [ //(on,off)
 	[ "#d27979" , "#ff4d4d" ],
@@ -53,6 +54,17 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     });
     $scope.user = User.me();
     
+
+    $scope.lastEvent = {
+            "id":0,
+            "host":"",
+            "code":0,
+            "duration":0,
+            "endpoint":"",
+            "project_id":0,
+            "timestamp":""
+    };
+
     //Value for new projects credentials
     $scope.newProject = {
         name : ""
@@ -70,8 +82,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     //Selects project from project selection menu
     $scope.selectProject = function(project) {
         $scope.selectedProject = project;
-        console.log($scope.selectedProject);
-    }
+        $scope.updateDash();
+    };
     
     //Adds new project if given unique project name
     //Otherwise, does nothing
@@ -84,5 +96,29 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
                 $scope.projects = Project.query();
             });
         }
+    };
+    
+    $scope.poll = function(){
+        Project.pollEvent({
+            id: $scope.selectedProject.id,
+            event_id: $scope.lastEvent.id
+        }, function(e){
+            $q.resolve(e);
+            if (e.id) {
+                $scope.lastEvent = e;
+                source_light_on($scope.lastEvent.code);
+                setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
+            }
+        });
+    };
+    
+    $scope.updateDash = function() { 
+        a = $scope.lastEvent.id;
+        $scope.poll();
+        $interval($scope.poll, 1000);
+        if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
+            source_light_on($scope.lastEvent.code);
+        }
+            
     };
 });

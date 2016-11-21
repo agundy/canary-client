@@ -7,6 +7,13 @@ app.factory('Project', function($resource){
             params: {
                 controller: 'regentoken'
             }
+        },
+        pollEvent: {
+            method: 'GET',
+            params: {
+                controller: 'event',
+                event_id: 'event_id'
+            }
         }
     });
 });
