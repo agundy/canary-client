@@ -28,7 +28,6 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
                 $scope.badCreds = false;
                 $location.path('/dashboard');
             }, function(rej) {
-						    console.log(rej);
                 if(rej.status == 500) {
 								    $scope.badCreds = true;
                 }
@@ -43,7 +42,7 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
                 $scope.userExists = false;
                 $location.path('/dashboard');
             }, function(rej) {
-                if(rej.data == "Error creating user") {
+                if(rej.status == 500) {
                     $scope.userExists = true;
                 }
             });
