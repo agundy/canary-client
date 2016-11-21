@@ -1,6 +1,7 @@
 app.controller('LoginCtrl', function($scope, $location, Auth) {
     $scope.modeRegister = false;
     $scope.badCreds = false;
+    $scope.userExists = false;
 
     $scope.loginUser = {
         email: '',
@@ -18,7 +19,7 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
             .then(function(){
                 $scope.badCreds = false;
                 $location.path('/dashboard');
-            },function(rej) {
+            }, function(rej) {
                 if(rej.data == "Error logging in") {
 								    $scope.badCreds = true;
                 }
@@ -28,7 +29,12 @@ app.controller('LoginCtrl', function($scope, $location, Auth) {
     $scope.register = function() {
         Auth.signup($scope.registerUser)
             .then(function(){
+                $scope.userExists = true;
                 $location.path('/dashboard');
+            }, function(rej) {
+                if(rej.data == "Error creating user") {
+                    $scope.userExists = true;
+                }
             });
     };
 

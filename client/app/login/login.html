@@ -10,6 +10,7 @@
     </form>
 
     <form ng-show="modeRegister" ng-submit="register()" id="auth">
+        <p id="alert" ng-show="userExists">Email already in use</p>
         <div id ="forms">
             <input class="in" type="name" placeholder="Enter Name" name="name" ng-model="registerUser.name">
             <input class="in" type="email" placeholder="Enter Email" name="email" ng-model="registerUser.email" required>
