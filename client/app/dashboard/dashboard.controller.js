@@ -45,6 +45,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     $scope.user = User.me();
     
     $scope.lastEvent = {
+            "id":0,
             "host":"",
             "code":0,
             "duration":0,
@@ -66,7 +67,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     $scope.selectProject = function(project) {
         $scope.selectedProject = project;
         console.log($scope.selectedProject);
-    }
+    };
     
     $scope.addProject = function(){
         if ($scope.newProject.name != "") {
@@ -80,7 +81,9 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     };
     
     $scope.poll = function(){
-        $scope.lastEvent = $scope.selectedProject.$pollEvent({id:$scope.lastEvent.id});
+        console.log({id: $scope.selectedProject.id, event_id: $scope.lastEvent.id});
+        Project.pollEvent({id: $scope.selectedProject.id, event_id: $scope.lastEvent.id})
+        //$scope.lastEvent = $scope.selectedProject.$pollEvent({event_id:$scope.lastEvent.id});
     }
     
     $scope.updateDash = function() { 
@@ -91,5 +94,5 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
             setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
         }
             
-    }
+    };
 });
