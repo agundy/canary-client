@@ -118,7 +118,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         a = $scope.lastEvent.id;
         $scope.poll();
         if (!angular.isDefined($scope.isPolling)) {
-            $scope.isPolling = $interval($scope.poll(), 1000);
+            $scope.isPolling = $interval($scope.poll, 1000);
         }
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
             source_light_on($scope.lastEvent.code);
