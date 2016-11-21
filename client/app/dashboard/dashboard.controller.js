@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User) {
+app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
     $scope.source_array = [
         {value: "200", text: "Page Load"},
         {value: "400", text: "400: Bad Request"},
@@ -81,17 +81,26 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User)
     };
     
     $scope.poll = function(){
-        console.log({id: $scope.selectedProject.id, event_id: $scope.lastEvent.id});
-        Project.pollEvent({id: $scope.selectedProject.id, event_id: $scope.lastEvent.id})
-        //$scope.lastEvent = $scope.selectedProject.$pollEvent({event_id:$scope.lastEvent.id});
-    }
+        Project.pollEvent({
+            id: $scope.selectedProject.id,
+            event_id: $scope.lastEvent.id
+        }, function(e){
+            $q.resolve(e);
+            if (e.id) {
+                $scope.lastEvent = e;
+                source_light_on($scope.lastEvent.code);
+                setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
+            }
+        });
+    };
+
     
     $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
         $scope.poll();
+        $interval($scope.poll, 1000);
         if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
             source_light_on($scope.lastEvent.code);
-            setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
         }
             
     };
