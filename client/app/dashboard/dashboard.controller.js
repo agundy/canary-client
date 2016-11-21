@@ -66,7 +66,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     
     $scope.selectProject = function(project) {
         $scope.selectedProject = project;
-        console.log($scope.selectedProject);
+        $scope.updateDash();
     };
     
     $scope.addProject = function(){
@@ -93,7 +93,6 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
             }
         });
     };
-
     
     $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
