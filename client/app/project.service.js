@@ -9,12 +9,12 @@ app.factory('Project', function($resource){
             }
         }
     }, {
-        pollEvent: function(id){
-            self.method = 'GET';
-            self.params = {
+        pollEvent: {
+            method: 'GET',
+            params: {
                 controller: 'event?event_id=',
-                eventid: id
-            };
+                eventid: $resource.id
+            }
         }
     });
 });
