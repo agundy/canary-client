@@ -61,12 +61,12 @@ function loadTable(){
                     blink_source(this.className);
                 },false);
             if (!todayWeLie){ 
-                row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][Number(row.cells[j].dataset.inOn)];
+                row.cells[j].style.backgroundColor = colorsHSL[Number(row.cells[j].dataset.colorIndex)][Number(row.cells[j].dataset.inOn)];
             } else{
                 if (Math.random()<.2) {
-                    row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][1];
+                    row.cells[j].style.backgroundColor = colorsHSL[Number(row.cells[j].dataset.colorIndex)][1];
                 } else{
-                    row.cells[j].style.backgroundColor = colors[Number(row.cells[j].dataset.colorIndex)][0];
+                    row.cells[j].style.backgroundColor = colorsHSL[Number(row.cells[j].dataset.colorIndex)][0];
                 }
             }
             k++;
@@ -110,8 +110,7 @@ a given data source
 function source_light_on(someClass) {
     var cells = document.getElementsByClassName(someClass);
     for (var i = 0; i < cells.length; i++) { 
-        console.log(cells[i].style.backgroundColor + " " + colors[Number(cells[i].dataset.colorIndex)][1]);
-        cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][1];
+        cells[i].style.backgroundColor = colorsHSL[Number(cells[i].dataset.colorIndex)][1];
     }
 }
 
@@ -122,7 +121,7 @@ a given data source
 function source_light_off(someClass) {
     var cells = document.getElementsByClassName(someClass);
     for (var i = 0; i < cells.length; i++) { 
-        cells[i].style.backgroundColor = colors[Number(cells[i].dataset.colorIndex)][0];
+        cells[i].style.backgroundColor = colorsHSL[Number(cells[i].dataset.colorIndex)][0];
     }
 }
 
@@ -154,6 +153,19 @@ var colors = [ //[off,on]
 	[ "#7979d2" , "#4d4dff" ],
 	[ "#b579d2" , "#c44dff" ],
     [ "#d279b5" , "#ff4dc3" ]
+    ];
+
+var colorsHSL = [//[off,on]
+  [ "hsl(0,100%,75%)" , "hsl(0,100%,50%)" ],
+  [ "hsl(40,100%,75%)" , "hsl(40,100%,50%)" ],
+  [ "hsl(80,100%,75%)" , "hsl(80,100%,50%)" ],
+  [ "hsl(120,100%,75%)" , "hsl(120,100%,50%)" ],
+  [ "hsl(215,100%,75%)" , "hsl(160,100%,50%)" ],
+  [ "hsl(230,100%,75%)" , "hsl(200,100%,50%)" ],
+  [ "hsl(240,100%,75%)" , "hsl(240,100%,50%)" ],
+  [ "hsl(280,100%,75%)" , "hsl(280,100%,50%)" ],
+  [ "hsl(320,100%,75%)" , "hsl(320,100%,50%)" ],
+  [ "hsl(360,100%,75%)" , "hsl(360,100%,50%)" ]
     ];
 
 //Click event listener for add data source selection button
