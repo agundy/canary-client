@@ -75,6 +75,7 @@ td:hover {
     margin-right: 5%;
     background-color: white;
     overflow-y: scroll;
+    color: black;
 }
 
 #projects {
@@ -97,7 +98,7 @@ td:hover {
 }
 
 .controller {
-    width:40px;
+    width:15px;
     background-color: lightsteelblue;
 }
 

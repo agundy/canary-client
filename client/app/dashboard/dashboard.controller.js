@@ -1,19 +1,29 @@
 app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
     $scope.source_array = [
-        {value: "200", text: "Page Load"},
-        {value: "400", text: "400: Bad Request"},
-        {value: "403", text: "403: Access Denied"},
-        {value: "404", text: "404: Not Found"},
-        {value: "500", text: "500: Server Error"},
-        {value: "usr0", text: "API 1"},
-        {value: "usr1", text: "API 2"},
-        {value: "usr2", text: "API 3"},
-        {value: "usr3", text: "API 4"},
-        {value: "del", text: "Delete Source"}
+        { code: "100", description : "never" },
+        { code: "200", description : "gonna" },
+        { code: "300", description : "give" },
+        { code: "400", description : "you" },
+        { code: "500", description : "up" }
     ];
     
+    
+    
+    $scope.doSquaredSources = function(){
+        var squared = [[]];
+        for (i = 0; i < $scope.source_array.length; i++) {
+            if (i % Math.floor(Math.sqrt($scope.source_array.length)) == 0) { squared.push([]); }
+            if ($scope.source_array[i]) { squared[Math.floor(i / Math.floor(Math.sqrt($scope.source_array.length)))].push($scope.source_array[i])}
+        }
+        return squared;
+    }
+    
+    $scope.squaredSources = $scope.doSquaredSources();
+        
+    $scope.rows = function() { Math.sqrt($scope.source_array.length); };
+    
     $scope.caughtHTTPcodes = {
-        "100" : "Continue","101" : "Switching Protocols","102" : "Processing","200" : "OK","201" : "Created","202" : "Accepted","203" : "Non-Authoritative Information","204" : "No Content","205" : "Reset Content","206" : "Partial Content","207" : "Multi-Status","208" : "Already Reported","226" : "IM Used","300" : "Multiple Choices","301" : "Moved Permanently","302" : "Found","303" : "See Other","304" : "Not Modified","305" : "Use Proxy","307" : "Temporary Redirect","308" : "Permanent Redirect","400" : "Bad Request","401" : "Unauthorized","402" : "Payment Required","403" : "Forbidden","404" : "Not Found","405" : "Method Not Allowed","406" : "Not Acceptable","407" : "Proxy Authentication Required","408" : "Request Timeout","409" : "Conflict","410" : "Gone","411" : "Length Required","412" : "Precondition Failed","413" : "Payload Too Large","414" : "URI Too Long","415" : "Unsupported Media Type","416" : "Range Not Satisfiable","417" : "Expectation Failed","421" : "Misdirected Request","422" : "Unprocessable Entity","423" : "Locked","424" : "Failed Dependency","426" : "Upgrade Required","428" : "Precondition Required","429" : "Too Many Requests","431" : "Request Header Fields Too Large","451" : "Unavailable For Legal Reasons","500" : "Internal Server Error","501" : "Not Implemented","502" : "Bad Gateway","503" : "Service Unavailable","504" : "Gateway Timeout","505" : "HTTP Version Not Supported","506" : "Variant Also Negotiates","507" : "Insufficient Storage","508" : "Loop Detected","510" : "Not Extended","511" : "Network Authentication Required"
+        "100" : ["Continue", 0 ], "101" : ["Switching Protocols", 0 ], "102" : ["Processing", 0 ], "200" : ["OK", 0 ], "201" : ["Created", 0 ], "202" : ["Accepted", 0 ], "203" : ["Non-Authoritative Information", 0 ], "204" : ["No Content", 0 ], "205" : ["Reset Content", 0 ], "206" : ["Partial Content", 0 ], "207" : ["Multi-Status", 0 ], "208" : ["Already Reported", 0 ], "226" : ["IM Used", 0 ], "300" : ["Multiple Choices", 0 ], "301" : ["Moved Permanently", 0 ], "302" : ["Found", 0 ], "303" : ["See Other", 0 ], "304" : ["Not Modified", 0 ], "305" : ["Use Proxy", 0 ], "307" : ["Temporary Redirect", 0 ], "308" : ["Permanent Redirect", 0 ], "400" : ["Bad Request", 0 ], "401" : ["Unauthorized", 0 ], "402" : ["Payment Required", 0 ], "403" : ["Forbidden", 0 ], "404" : ["Not Found", 0 ], "405" : ["Method Not Allowed", 0 ], "406" : ["Not Acceptable", 0 ], "407" : ["Proxy Authentication Required", 0 ], "408" : ["Request Timeout", 0 ], "409" : ["Conflict", 0 ], "410" : ["Gone", 0 ], "411" : ["Length Required", 0 ], "412" : ["Precondition Failed", 0 ], "413" : ["Payload Too Large", 0 ], "414" : ["URI Too Long", 0 ], "415" : ["Unsupported Media Type", 0 ], "416" : ["Range Not Satisfiable", 0 ], "417" : ["Expectation Failed", 0 ], "421" : ["Misdirected Request", 0 ], "422" : ["Unprocessable Entity", 0 ], "423" : ["Locked", 0 ], "424" : ["Failed Dependency", 0 ], "426" : ["Upgrade Required", 0 ], "428" : ["Precondition Required", 0 ], "429" : ["Too Many Requests", 0 ], "431" : ["Request Header Fields Too Large", 0 ], "451" : ["Unavailable For Legal Reasons", 0 ], "500" : ["Internal Server Error", 0 ], "501" : ["Not Implemented", 0 ], "502" : ["Bad Gateway", 0 ], "503" : ["Service Unavailable", 0 ], "504" : ["Gateway Timeout", 0 ], "505" : ["HTTP Version Not Supported", 0 ], "506" : ["Variant Also Negotiates", 0 ], "507" : ["Insufficient Storage", 0 ], "508" : ["Loop Detected", 0 ], "510" : ["Not Extended", 0 ], "511" : ["Network Authentication Required", 0]
     };
 
     //Array for Cell colors
@@ -37,17 +47,33 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
 
     //Adds new data source to selected project
     //Currently not ported from dash_settings
-    $scope.addSource = function() {
+    $scope.newDataSource = {
+        code : ""
     };
+    
+    $scope.getColor = function(httpCode){
+        return { 'background-color' : $scope.colors[Math.floor(Number(httpCode) / 100)][$scope.caughtHTTPcodes[httpCode][1]] };
+    }
+    
+    $scope.addSource = function() {
+        if (angular.isDefined($scope.caughtHTTPcodes[$scope.newDataSource.code])) {
+            var newData = {
+                code: $scope.newDataSource.code,
+                description : $scope.caughtHTTPcodes[$scope.newDataSource.code][0]
+            };
+            $scope.source_array.push(newData);
+            $scope.squaredSources = angular.copy($scope.doSquaredSources());
+        }else if ($scope.newDataSource.code != ""){ alert("please use only defined HTTP codes");}
+    };
+    
+    
 
     //Pops last data source from selected project
     //Currently not ported from dash_settings
-    $scope.popSource = function() {
-    };
-
-    //Refreshes Tables to reflect changes in dashboard settings
-    //Currently not ported from dash_settings
-    $scope.refreshSources = function() {
+    $scope.popSource = function(source) {
+        var index = $scope.source_array.indexOf(source);
+        $scope.source_array.splice(index, 1);
+        $scope.squaredSources = angular.copy($scope.doSquaredSources());
     };
 
     //Currently selected project
@@ -71,6 +97,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     $scope.newProject = {
         name : ""
     };
+    
+
     
     //Creates a new token for the selected project
     $scope.newToken = function(project) {
@@ -108,12 +136,15 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
             $q.resolve(e);
             if (e.id) {
                 $scope.lastEvent = e;
-                source_light_on($scope.lastEvent.code);
-                setTimeout(function() { source_light_off($scope.lastEvent.code); },1000);
+                $scope.toggleDataSource(String($scope.lastEvent.code));
+                setTimeout(function() { $scope.toggleDataSource(String($scope.lastEvent.code)) },1000);
             }
         });
     };
     
+    $scope.toggleDataSource = function(someSource) {
+        $scope.caughtHTTPcodes.someSource[1] = ($scope.caughtHTTPcodes.someSource[1] + 1) % 2;
+    };
     
     
     $scope.updateDash = function() { 

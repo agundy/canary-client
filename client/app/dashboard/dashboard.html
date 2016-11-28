@@ -11,10 +11,10 @@
             <br><br>
             <h3>Data Sources</h3>
             <div id="sources">
+                <div ng-repeat="source in source_array">{{source.description}} &nbsp;<img class="controller" id="minus" src="/static/minus.svg" ng-click="popSource(source)"></img></div>
             </div>
-            <img class="controller" id="plus" src="/static/plus.svg"></img>
-            <img class="controller" id="minus" src="/static/minus.svg"></img>
-            <img class="controller" id="gear" src="/static/gear.svg"></img>
+            <input class="psubmit" type="name" placeholder="New Data Source" name="name" ng-model="newDataSource.code">
+            <img class="controller" id="plus" src="/static/plus.svg" ng-click="addSource()"></img>
         </div>
         <div ng-show="showSelector" id="project_selector">
             <button id="cancel" ng-click="toggleSelector()">X</button>
@@ -36,8 +36,7 @@
     </div>
     <div id="project_dash">
         <table id="dash_table">
+                <tr ng-repeat="sources in squaredSources"><td ng-repeat="source in sources" ng-style="getColor(source.code)">{{source.code}}<br>{{source.description}}</td></tr>
         </table>
     </div>
 </div>
-
-<script src="/static/dash_settings.js"></script>
