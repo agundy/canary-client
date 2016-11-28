@@ -30,6 +30,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     //Visibility state of project selection menu
     $scope.showSelector = false;
     
+    $scope.logOut = function() { Auth.logout();};
+    
     //Toggles visibility of project selection menu
     $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
 
