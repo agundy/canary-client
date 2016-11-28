@@ -56,7 +56,7 @@ function loadTable(){
             row.insertCell(j).innerHTML = data[k].children[data[k].selectedIndex].text;
             row.cells[j].className = (' ' + source_text).slice(1);
             row.cells[j].dataset.inOn = "0";
-            row.cells[j].dataset.colorIndex = String(k%9);
+            row.cells[j].dataset.colorIndex = String((data[k].selectedIndex)%9);
                 row.cells[j].addEventListener("click", function() {
                     blink_source(this.className);
                 },false);
