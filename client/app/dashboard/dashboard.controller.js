@@ -100,6 +100,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         }
     };
     
+    //Polls database for new Events
     $scope.poll = function(){
         Project.pollEvent({
             id: $scope.selectedProject.id,
@@ -115,7 +116,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     };
     
     
-    
+    //Updates the Table based on new Events
     $scope.updateDash = function() { 
         a = $scope.lastEvent.id;
         $scope.poll();
