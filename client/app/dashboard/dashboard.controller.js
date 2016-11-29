@@ -81,6 +81,11 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         return { 'background-color' : $scope.colorsHSL[Math.floor(Number(httpCode) / 100) - 1][$scope.caughtHTTPcodes[httpCode][1]] };
     }
     
+    $scope.blinkColor = function(httpCode){
+		    'background-color' : $scope.colorsHSL[Math.floor(Number(httpCode) / 100) - 1][1];
+        setTimeout(function(){'background-color' : $scope.colorsHSL[Math.floor(Number(httpCode) / 100) - 1][0]});
+    }
+    
     //Adds data source to selected Project
     $scope.addSource = function() {
         if (angular.isDefined($scope.caughtHTTPcodes[$scope.newDataSource.code])) {
