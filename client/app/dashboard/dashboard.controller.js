@@ -1,10 +1,10 @@
 app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
     $scope.source_array = [
-        { code: "100", description : "never" },
-        { code: "200", description : "gonna" },
-        { code: "300", description : "give" },
-        { code: "400", description : "you" },
-        { code: "500", description : "up" }
+        { code: "404", description : "Not Found" },
+        { code: "403", description : "Forbibben" },
+        { code: "500", description : "Internal Server Error" },
+        { code: "503", description : "Service Unavailable" },
+        { code: "504", description : "Gateway Timeout" }
     ];
     
     
@@ -127,6 +127,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     };
     
     
+    $scope.refreshRate = 1000;
+    
     $scope.toggleDataSource = function(someSource) {
         $scope.caughtHTTPcodes[someSource][1] = ($scope.caughtHTTPcodes[someSource][1] + 1) % 2;
         $scope.squaredSources = angular.copy($scope.doSquaredSources());
@@ -141,12 +143,12 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
             if (e.id) {
                 $scope.lastEvent = e;
                 $scope.toggleDataSource(String($scope.lastEvent.code));
-                setTimeout(function() { $scope.toggleDataSource(String($scope.lastEvent.code)) },1000);
+                setTimeout(function() { $scope.toggleDataSource(String($scope.lastEvent.code)) },$scope.refreshRate);
             }
         });
     };
     
-    $scope.isPolling = $interval($scope.poll, 1000);
+    $scope.isPolling = $interval($scope.poll, $scope.refreshRate);
    
     
 });
