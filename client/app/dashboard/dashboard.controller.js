@@ -1,4 +1,5 @@
 app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
+   
     $scope.source_array = [
         { code: "404", description : "Not Found" },
         { code: "403", description : "Forbibben" },
@@ -6,9 +7,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         { code: "503", description : "Service Unavailable" },
         { code: "504", description : "Gateway Timeout" }
     ];
-    
-    
-    
+     
     $scope.doSquaredSources = function(){
         var squared = [[]];
         for (i = 0; i < $scope.source_array.length; i++) {
@@ -19,8 +18,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     }
     
     $scope.squaredSources = $scope.doSquaredSources();
-        
-    $scope.rows = function() { Math.sqrt($scope.source_array.length); };
+    
     
     $scope.caughtHTTPcodes = {
         "100" : ["Continue", 0 ], "101" : ["Switching Protocols", 0 ], "102" : ["Processing", 0 ], "200" : ["OK", 0 ], "201" : ["Created", 0 ], "202" : ["Accepted", 0 ], "203" : ["Non-Authoritative Information", 0 ], "204" : ["No Content", 0 ], "205" : ["Reset Content", 0 ], "206" : ["Partial Content", 0 ], "207" : ["Multi-Status", 0 ], "208" : ["Already Reported", 0 ], "226" : ["IM Used", 0 ], "300" : ["Multiple Choices", 0 ], "301" : ["Moved Permanently", 0 ], "302" : ["Found", 0 ], "303" : ["See Other", 0 ], "304" : ["Not Modified", 0 ], "305" : ["Use Proxy", 0 ], "307" : ["Temporary Redirect", 0 ], "308" : ["Permanent Redirect", 0 ], "400" : ["Bad Request", 0 ], "401" : ["Unauthorized", 0 ], "402" : ["Payment Required", 0 ], "403" : ["Forbidden", 0 ], "404" : ["Not Found", 0 ], "405" : ["Method Not Allowed", 0 ], "406" : ["Not Acceptable", 0 ], "407" : ["Proxy Authentication Required", 0 ], "408" : ["Request Timeout", 0 ], "409" : ["Conflict", 0 ], "410" : ["Gone", 0 ], "411" : ["Length Required", 0 ], "412" : ["Precondition Failed", 0 ], "413" : ["Payload Too Large", 0 ], "414" : ["URI Too Long", 0 ], "415" : ["Unsupported Media Type", 0 ], "416" : ["Range Not Satisfiable", 0 ], "417" : ["Expectation Failed", 0 ], "421" : ["Misdirected Request", 0 ], "422" : ["Unprocessable Entity", 0 ], "423" : ["Locked", 0 ], "424" : ["Failed Dependency", 0 ], "426" : ["Upgrade Required", 0 ], "428" : ["Precondition Required", 0 ], "429" : ["Too Many Requests", 0 ], "431" : ["Request Header Fields Too Large", 0 ], "451" : ["Unavailable For Legal Reasons", 0 ], "500" : ["Internal Server Error", 0 ], "501" : ["Not Implemented", 0 ], "502" : ["Bad Gateway", 0 ], "503" : ["Service Unavailable", 0 ], "504" : ["Gateway Timeout", 0 ], "505" : ["HTTP Version Not Supported", 0 ], "506" : ["Variant Also Negotiates", 0 ], "507" : ["Insufficient Storage", 0 ], "508" : ["Loop Detected", 0 ], "510" : ["Not Extended", 0 ], "511" : ["Network Authentication Required", 0]
@@ -50,7 +48,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     };
     
     $scope.getColor = function(httpCode){
-        return { 'background-color' : $scope.colors[Math.floor(Number(httpCode) / 100)][$scope.caughtHTTPcodes[httpCode][1]] };
+        return { 'background-color' : $scope.colors[Math.floor(Number(httpCode) / 100) - 1][$scope.caughtHTTPcodes[httpCode][1]] };
     }
     
     $scope.addSource = function() {
