@@ -45,8 +45,6 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     //Toggles visibility of project selection menu
     $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
 
-    //Adds new data source to selected project
-    //Currently not ported from dash_settings
     $scope.newDataSource = {
         code : ""
     };
@@ -128,6 +126,12 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         }
     };
     
+    
+    $scope.toggleDataSource = function(someSource) {
+        $scope.caughtHTTPcodes[someSource][1] = ($scope.caughtHTTPcodes[someSource][1] + 1) % 2;
+        $scope.squaredSources = angular.copy($scope.doSquaredSources());
+    };
+    
     $scope.poll = function(){
         Project.pollEvent({
             id: $scope.selectedProject.id,
@@ -142,20 +146,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         });
     };
     
-    $scope.toggleDataSource = function(someSource) {
-        $scope.caughtHTTPcodes.someSource[1] = ($scope.caughtHTTPcodes.someSource[1] + 1) % 2;
-    };
+    $scope.isPolling = $interval($scope.poll, 1000);
+   
     
-    
-    $scope.updateDash = function() { 
-        a = $scope.lastEvent.id;
-        $scope.poll();
-        if (angular.isUndefined($scope.isPolling)) {
-            $scope.isPolling = $interval($scope.poll, 1000);
-        }
-        if (( a != $scope.lastEvent.id) && ($scope.caughtHTTPcodes.indexOf($scope.lastEvent.code) > -1 )){
-            source_light_on($scope.lastEvent.code);
-        }
-            
-    };
 });
