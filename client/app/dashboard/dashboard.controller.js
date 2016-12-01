@@ -60,12 +60,12 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     //Array for Cell colors in HSL
     $scope.colorsHSL = [ //(off,on)
 	[ "hsl(180,100%,75%)" , "hsl(180,100%,50%)" ],
-	[ "hsl(120,100%,75%)" , "hsl(120,100%,75%)" ],
-	[ "hsl(60,100%,75%)" , "hsl(60,100%,50%)" ],
+	[ "hsl(120,100%,75%)" , "hsl(120,100%,50%)" ],
+	[ "hsl(260,100%,75%)" , "hsl(260,100%,50%)" ],
 	[ "hsl(30,100%,75%)" , "hsl(30,100%,50%)" ],
   [ "hsl(0,100%,75%)" , "hsl(0,100%,50%)" ]
     ];
-    
+
     //Visibility state of project selection menu
     $scope.showSelector = false;
     
