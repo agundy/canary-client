@@ -1,9 +1,13 @@
+//Manages general interaction with a session of the Canary application
+
+//Establishes an Angular module to hold session information
 var app = angular.module('app', [
         'ngRoute',
         'ngCookies',
         'ngResource'
 ])
 .config(function($routeProvider, $locationProvider, $httpProvider){
+    //Configuration for page redirection and loading
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {
@@ -18,6 +22,7 @@ var app = angular.module('app', [
     ;
     $httpProvider.interceptors.push('authInterceptor');
 }).factory('authInterceptor', function($rootScope, $q, $cookieStore, $location){
+    //Manages responses based on the current session configuration
     return {
         request(config) {
             config.headers = config.headers || {};

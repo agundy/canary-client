@@ -1,5 +1,6 @@
+//Controls UI components for dashboard page
 app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User, $interval, $q) {
-   
+    //Array of default data sources
     $scope.source_array = [
         { code: "404", description : "Not Found" },
         { code: "403", description : "Forbibben" },
@@ -7,7 +8,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         { code: "503", description : "Service Unavailable" },
         { code: "504", description : "Gateway Timeout" }
     ];
-     
+
+    //Organizes current data sources into a square grid format 
     $scope.doSquaredSources = function(){
         var squared = [[]];
         for (i = 0; i < $scope.source_array.length; i++) {
@@ -17,9 +19,10 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         return squared;
     }
     
+		//Square grid of current data sources
     $scope.squaredSources = $scope.doSquaredSources();
     
-    
+    //Set of valid HTTP response codes, description, and state
     $scope.caughtHTTPcodes = {
         "100" : ["Continue", 0 ], "101" : ["Switching Protocols", 0 ], "102" : ["Processing", 0 ], 
         "200" : ["OK", 0 ], "201" : ["Created", 0 ], "202" : ["Accepted", 0 ], 
@@ -44,6 +47,20 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         "510" : ["Not Extended", 0 ], "511" : ["Network Authentication Required", 0]
     };
 
+    //Visibility state of project selection menu
+    $scope.showSelector = false;
+    
+		//Logout button function
+    $scope.logOut = function() { Auth.logout();};
+    
+    //Toggles visibility of project selection menu
+    $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
+
+    //Set of values for new data sources (only code needed)
+    $scope.newDataSource = {
+        code : ""
+    };
+
     //Array for Cell colors in hex
     $scope.colors = [ //(off,on)
 	[ "#d27979" , "#ff4d4d" ],
@@ -65,24 +82,11 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
 	[ "hsl(30,100%,75%)" , "hsl(30,100%,50%)" ],
   [ "hsl(0,100%,75%)" , "hsl(0,100%,50%)" ]
     ];
-
-    //Visibility state of project selection menu
-    $scope.showSelector = false;
-    
-    $scope.logOut = function() { Auth.logout();};
-    
-    //Toggles visibility of project selection menu
-    $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
-
-    $scope.newDataSource = {
-        code : ""
-    };
     
     //Gets the color for a data source
     $scope.getColor = function(httpCode){
         return { 'background-color' : $scope.colorsHSL[Math.floor(Number(httpCode) / 100) - 1][$scope.caughtHTTPcodes[httpCode][1]] };
     }
-    
     
     //Adds data source to selected Project
     $scope.addSource = function() {
@@ -181,6 +185,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
         });
     };
     
+    //Boolean for controlling Event polling
     $scope.isPolling = $interval($scope.poll, $scope.refreshRate);
 });
 
