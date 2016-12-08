@@ -161,8 +161,8 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
             };
             Project.save(project, function(){
                 var a = $scope.projects.length
-                $scope.projects = Project.query({}, function() {
-                    if (a == $scope.projects.length) { $scope.nonUniqueSource = true;}});
+                $scope.projects = Project.query();
+                if (a == $scope.projects.length) { $scope.nonUniqueSource = true;}
             });
         }
     };
