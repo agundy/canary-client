@@ -26,6 +26,7 @@
                 </div>
             </div>
             <br>
+            <div ng-show="nonUniqueSource">Please use only unique project names.</div>
             <button class="psubmit" type="button" ng-click="addProject()">Add Project</button>
             <input class="psubmit" type="name" placeholder="New Project Name" name="name" ng-model="newProject.name">
             <h3>Current Project API Token:<br>{{selectedProject.Token}}</h3>
