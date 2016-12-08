@@ -160,7 +160,7 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
                 name: $scope.newProject.name
             };
             Project.save(project, function(){
-                var a = $scope.projects.length
+                var a = $scope.projects.length;
                 $scope.projects = Project.query();
                 if (a == $scope.projects.length) { $scope.nonUniqueSource = true;}
             });
