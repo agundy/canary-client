@@ -49,12 +49,16 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
 
     //Visibility state of project selection menu
     $scope.showSelector = false;
+    $scope.nonUniqueSource = false;
     
 		//Logout button function
     $scope.logOut = function() { Auth.logout();};
     
     //Toggles visibility of project selection menu
-    $scope.toggleSelector = function() { $scope.showSelector = !$scope.showSelector; }
+    $scope.toggleSelector = function() {
+        $scope.showSelector = !$scope.showSelector;
+        $scope.nonUniqueSource = false;
+    }
 
     //Set of values for new data sources (only code needed)
     $scope.newDataSource = {
@@ -156,7 +160,9 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
                 name: $scope.newProject.name
             };
             Project.save(project, function(){
-                $scope.projects = Project.query();
+                var a = $scope.projects.length
+                $scope.projects = Project.query({}, function() {
+                    if (a == $scope.projects.length) { $scope.nonUniqueSource = true;}});
             });
         }
     };
