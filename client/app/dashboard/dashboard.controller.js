@@ -156,15 +156,15 @@ app.controller('DashboardCtrl', function($scope, $location, Auth, Project, User,
     //Otherwise, does nothing
     $scope.addProject = function(){
         if ($scope.newProject.name != "") {
+            if ($.inArray($scope.newProject.name,[for (p of $scope.projects) p.name]) != -1) { $scope.nonUniqueSource = true; return;}
             var project = {
                 name: $scope.newProject.name
             };
             Project.save(project, function(){
-                var a = $scope.projects.length;
                 $scope.projects = Project.query();
-                if (a == $scope.projects.length) { $scope.nonUniqueSource = true;}
             });
         }
+        $scope.nonUniqueSource = false;
     };
     
     //Polling refresh rate
